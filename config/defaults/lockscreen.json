@@ -1,0 +1,202 @@
+{
+  "General": {
+    "scale": 1.0,
+    "enableAnimations": true,
+    "animatedBackgroundPlaceholder": "",
+    "backgroundFillMode": "fill"
+  },
+
+  "LockScreen": {
+    "display": true,
+    "paddingTop": 0,
+    "paddingRight": 0,
+    "paddingBottom": 0,
+    "paddingLeft": 0,
+    "background": "",
+    "useBackgroundColor": true,
+    "backgroundColor": "#1e1e2e",
+    "blur": 0,
+    "brightness": 0.0,
+    "saturation": 0.0,
+
+    "Clock": {
+      "display": true,
+      "position": "center",
+      "align": "center",
+      "format": "hh:mm",
+      "fontFamily": "JetBrainsMono",
+      "fontSize": 70,
+      "fontWeight": 900,
+      "color": "#cdd6f4"
+    },
+
+    "Date": {
+      "display": true,
+      "format": "dddd, MMMM dd, yyyy",
+      "locale": "en_US",
+      "fontFamily": "JetBrainsMono",
+      "fontSize": 14,
+      "fontWeight": 600,
+      "color": "#cdd6f4",
+      "marginTop": -15
+    },
+
+    "Message": {
+      "display": true,
+      "position": "bottom-center",
+      "align": "center",
+      "text": "Press any key",
+      "fontFamily": "JetBrainsMono",
+      "fontSize": 12,
+      "fontWeight": 400,
+      "displayIcon": true,
+      "icon": "catppuccin.png",
+      "iconFontFamily": "NerdFont",
+      "iconSize": 16,
+      "color": "#cdd6f4",
+      "paintIcon": false,
+      "spacing": 0
+    }
+  },
+
+  "LoginScreen": {
+    "background": "",
+    "useBackgroundColor": true,
+    "backgroundColor": "#1e1e2e",
+    "blur": 0,
+    "brightness": 0.0,
+    "saturation": 0.0,
+
+    "LoginArea": {
+      "position": "center",
+      "margin": -1,
+
+      "Avatar": {
+        "shape": "circle",
+        "borderRadius": 35,
+        "activeSize": 120,
+        "inactiveSize": 80,
+        "inactiveOpacity": 0.35,
+        "activeBorderSize": 0,
+        "inactiveBorderSize": 0,
+        "activeBorderColor": "#89dceb",
+        "inactiveBorderColor": "#89dceb"
+      },
+
+      "Username": {
+        "fontFamily": "JetBrainsMono",
+        "fontSize": 16,
+        "fontWeight": 700,
+        "color": "#cdd6f4",
+        "margin": 10
+      },
+
+      "PasswordInput": {
+        "width": 200,
+        "height": 30,
+        "displayIcon": false,
+        "fontFamily": "JetBrainsMono",
+        "fontSize": 12,
+        "icon": "password.svg",
+        "iconFontFamily": "NerdFont",
+        "iconSize": 16,
+        "contentColor": "#cdd6f4",
+        "backgroundColor": "#313244",
+        "backgroundOpacity": 1.0,
+        "borderSize": 0,
+        "borderColor": "#89dceb",
+        "borderRadiusLeft": 10,
+        "borderRadiusRight": 10,
+        "marginTop": 10,
+        "maskedCharacter": "●"
+      },
+
+      "LoginButton": {
+        "backgroundColor": "#313244",
+        "backgroundOpacity": 1.0,
+        "activeBackgroundColor": "#74c7ec",
+        "activeBackgroundOpacity": 1.0,
+        "icon": "arrow-right.svg",
+        "iconFontFamily": "NerdFont",
+        "iconSize": 18,
+        "contentColor": "#74c7ec",
+        "activeContentColor": "#1e1e2e",
+        "borderSize": 0,
+        "borderColor": "#89dceb",
+        "borderRadiusLeft": 10,
+        "borderRadiusRight": 10,
+        "marginLeft": 5,
+        "showTextIfNoPassword": true,
+        "hideIfNotNeeded": false,
+        "fontFamily": "JetBrainsMono",
+        "fontSize": 12,
+        "fontWeight": 600
+      }
+    },
+
+    "MenuArea": {
+      "Buttons": {
+        "marginTop": 0,
+        "marginRight": 0,
+        "marginBottom": 100,
+        "marginLeft": 0,
+        "size": 30,
+        "borderRadius": 10,
+        "spacing": 20,
+        "fontFamily": "JetBrainsMono"
+      },
+
+      "Popups": {
+        "maxHeight": 230,
+        "itemHeight": 30,
+        "itemSpacing": 2,
+        "padding": 5,
+        "displayScrollbar": false,
+        "margin": 5,
+        "backgroundColor": "#313244",
+        "backgroundOpacity": 1.0,
+        "activeOptionBackgroundColor": "#45475a",
+        "activeOptionBackgroundOpacity": 1.0,
+        "contentColor": "#cdd6f4",
+        "activeContentColor": "#74c7ec",
+        "fontFamily": "JetBrainsMono",
+        "borderSize": 0,
+        "borderColor": "#89dceb",
+        "fontSize": 11,
+        "iconSize": 16,
+        "iconFontFamily": "NerdFont"
+      }
+    },
+
+    "VirtualKeyboard": {
+      "scale": 1.0,
+      "position": "login",
+      "startHidden": true,
+      "backgroundColor": "#313244",
+      "backgroundOpacity": 0.15,
+      "keyContentColor": "#cdd6f4",
+      "keyColor": "#313244",
+      "keyOpacity": 1.0,
+      "keyActiveBackgroundColor": "#45475a",
+      "keyActiveOpacity": 1.0,
+      "selectionBackgroundColor": "#cdd6f4",
+      "selectionContentColor": "#1e1e2e",
+      "primaryColor": "#74c7ec",
+      "borderSize": 0,
+      "borderColor": "#89dceb",
+      "fontFamily": "JetBrainsMono"
+    }
+  },
+
+  "Tooltips": {
+    "enable": true,
+    "fontFamily": "JetBrainsMono",
+    "fontSize": 11,
+    "contentColor": "#cdd6f4",
+    "backgroundColor": "#313244",
+    "backgroundOpacity": 1.0,
+    "borderRadius": 10,
+    "disableUser": false,
+    "disableLoginButton": false
+  }
+}

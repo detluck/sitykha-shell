@@ -1,0 +1,89 @@
+# -----------------------------
+# Build directories (CMake/Qt Creator)
+# -----------------------------
+/build/
+/build-*/
+/cmake-build-*/
+/Desktop-*/
+
+# -----------------------------
+# CMake generated files
+# -----------------------------
+CMakeCache.txt
+cmake_install.cmake
+compile_commands.json
+CTestTestfile.cmake
+Testing/
+CMakeFiles/
+Makefile
+install_manifest.txt
+
+# -----------------------------
+# Ninja / Make artifacts
+# -----------------------------
+*.ninja
+.ninja_deps
+.ninja_log
+
+# -----------------------------
+# Binaries and libraries
+# -----------------------------
+*.o
+*.obj
+*.so
+*.so.*
+*.a
+*.la
+*.lo
+*.dll
+*.dylib
+*.exe
+*.out
+
+# -----------------------------
+# Qt / QML generated files
+# -----------------------------
+moc_*.cpp
+moc_*.h
+qrc_*.cpp
+ui_*.h
+*.qmlc
+*.jsc
+
+# -----------------------------
+# Qt Creator / editor files
+# -----------------------------
+*.pro.user
+*.pro.user.*
+*.qbs.user
+*.qmlproject.user
+*.creator
+*.creator.user
+*.creator.user.*
+*.files
+*.includes
+
+# -----------------------------
+# Logs and runtime dumps
+# -----------------------------
+*.log
+*.pid
+*.seed
+*.pid.lock
+*.stackdump
+core
+core.*
+
+# -----------------------------
+# OS / editor noise
+# -----------------------------
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+.qtcreator/
+.qtcreator
+*~
+*.swp
+*.swo
+
