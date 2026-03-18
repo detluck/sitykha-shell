@@ -31,6 +31,12 @@ list(REMOVE_DUPLICATES PROJECT_FILES)
 
 add_custom_target(ProjectSources SOURCES ${PROJECT_FILES})
 
+add_custom_target(run
+    COMMAND ${CMAKE_COMMAND} -E env QML2_IMPORT_PATH=/usr/lib/qt6/qml quickshell -p "${CMAKE_SOURCE_DIR}"
+    WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
+    COMMENT "Running Quickshell from source directory"
+)
+
 install(FILES
     "${CMAKE_SOURCE_DIR}/shell.qml"
     "${CMAKE_SOURCE_DIR}/qmldir"
