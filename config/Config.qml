@@ -197,9 +197,6 @@ Singleton{
         id: fileView
 
         path: "/home/detluck/.config/sitykha-shell/"
-
-
-
     }
 
     JsonAdapter{
