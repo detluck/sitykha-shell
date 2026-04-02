@@ -26,6 +26,11 @@ Singleton{
 
     property alias lockscreen: adapter.lockscreen
 
+    function save(){
+        saveTimer.restart();
+        savedRecently = true;
+        recentlySavedTimer.restart();
+    }
 
     function serializeConfig(){
         return{
@@ -172,10 +177,25 @@ Singleton{
 
         interval: 500
         onTriggered: {
-            timer.restart()
+            timer.restart();
+            try {
+                // Parse current config to preserve structure and comments if possible
+                let config = {};
+                try {
+                    config = JSON.parse(fileView.text());
+                } catch (e) {
+                    // If parsing fails, start with empty object
+                    config = {};
+                }
 
-            let config = {}
+                // Update config with current values
+                config = root.serializeConfig();
 
+                // Save to file with pretty printing
+                fileView.setText(JSON.stringify(config, null, 2));
+            } catch (e) {
+                //Toaster.toast(qsTr("Failed to serialize config"), e.message, "settings_alert", Toast.Error);
+            }
         }
     }
 
@@ -197,11 +217,42 @@ Singleton{
         id: fileView
 
         path: "/home/detluck/.config/sitykha-shell/"
-    }
+        watchChanges: true
+        onFileChanged: {
+            // Prevent reload loop - don't reload if we just saved
+            if (!root.recentlySaved) {
+                timer.restart();
+                reload();
+            } else {
+                // Self-initiated save - reload without toast
+                reload();
+            }
+        }
+        // onLoaded: {
+        //     try {
+        //         JSON.parse(text());
+        //         const elapsed = timer.elapsedMs();
+        //         // Only show toast for external changes (not our own saves) and when elapsed time is meaningful
+        //         if (adapter.utilities.toasts.configLoaded && !root.recentlySaved && elapsed > 0) {
+        //             Toaster.toast(qsTr("Config loaded"), qsTr("Config loaded in %1ms").arg(elapsed), "rule_settings");
+        //         } else if (adapter.utilities.toasts.configLoaded && root.recentlySaved && elapsed > 0) {
+        //             Toaster.toast(qsTr("Config saved"), qsTr("Config reloaded in %1ms").arg(elapsed), "rule_settings");
+        //         }
+        //     } catch (e) {
+        //         Toaster.toast(qsTr("Failed to load config"), e.message, "settings_alert", Toast.Error);
+        //     }
+        // }
+        // onLoadFailed: err => {
+        //     if (err !== FileViewError.FileNotFound)
+        //         Toaster.toast(qsTr("Failed to read config file"), FileViewError.toString(err), "settings_alert", Toast.Warning);
+        // }
+        // onSaveFailed: err => Toaster.toast(qsTr("Failed to save config"), FileViewError.toString(err), "settings_alert", Toast.Error)
 
-    JsonAdapter{
-        id: adapter
 
-        property LockscreenConfig lockscreen: LockscreenConfig{}
+        JsonAdapter{
+            id: adapter
+
+            property LockscreenConfig lockscreen: LockscreenConfig{}
+        }
     }
 }

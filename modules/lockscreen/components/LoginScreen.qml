@@ -27,8 +27,6 @@ Item {
     readonly property alias loginButton: loginButton
     readonly property alias loginContainer: loginContainer
 
-    property bool showKeyboard: !Config.virtualKeyboardStartHidden
-
     property bool foundUsers: userModel.count > 0
 
     // Login info
@@ -37,7 +35,6 @@ Item {
     property string userName: ""
     property string userRealName: ""
     property string userIcon: ""
-    property bool userNeedsPassword: true
 
     function login() {
         var user = foundUsers ? userName : userInput.text;

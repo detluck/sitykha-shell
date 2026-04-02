@@ -1,0 +1,2 @@
+module SitykhaShell
+singleton Config Config.qml
