@@ -71,8 +71,6 @@ ui_*.h
 *.seed
 *.pid.lock
 *.stackdump
-core
-core.*
 
 # -----------------------------
 # OS / editor noise
