@@ -1,3 +1,4 @@
+pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Effects
 import QtQuick.Controls
@@ -5,13 +6,22 @@ import Sitykha.Core
 
 Rectangle {
     id: avatar
-    property string shape: Config.lock.
+    property string shape: Config.lock.loginScreen.loginArea.avatar.shape
     property string source: ""
     property bool active: false
-    property int squareRadius: (shape == "circle") ? this.width : (Config.avatarBorderRadius === 0 ? 1 : Config.avatarBorderRadius * Config.generalScale) // min: 1
-    property bool drawStroke: (active && Config.avatarActiveBorderSize > 0) || (!active && Config.avatarInactiveBorderSize > 0)
-    property color strokeColor: active ? Config.avatarActiveBorderColor : Config.avatarInactiveBorderColor
-    property int strokeSize: active ? (Config.avatarActiveBorderSize * Config.generalScale) : (Config.avatarInactiveBorderSize * Config.generalScale)
+
+    // Config.lock.generalScale und Config.lock.loginArea.avatar.borderRadius
+    property int squareRadius: (shape == "circle") ? this.width : (Config.lock.loginScreen.loginArea.avatar.borderRadius === 0 ? 1 : Config.lock.loginArea.avatar.borderRadius * Config.lock.generalScale) // min: 1
+
+    // Config.lock.loginArea.avatar.activeBorderSize / inactiveBorderSize
+    property bool drawStroke: (active && Config.lock.loginScreen.loginArea.avatar.activeBorderSize > 0) || (!active && Config.lock.loginArea.avatar.inactiveBorderSize > 0)
+
+    // Config.lock.loginArea.avatar.activeBorderColor / inactiveBorderColor
+    property color strokeColor: active ? Config.lock.loginScreen.loginArea.avatar.activeBorderColor : Config.lock.loginArea.avatar.inactiveBorderColor
+
+    // Stroke Size mit General Scale
+    property int strokeSize: active ? (Config.lock.loginScreen.loginArea.avatar.activeBorderSize * Config.lock.generalScale) : (Config.lock.loginArea.avatar.inactiveBorderSize * Config.lock.generalScale)
+
     property string tooltipText: ""
     property bool showTooltip: false
 
@@ -26,8 +36,8 @@ Rectangle {
     Rectangle {
         anchors.fill: parent
         radius: avatar.squareRadius
-        color: Config.passwordInputBackgroundColor
-        opacity: Config.passwordInputBackgroundOpacity
+        color: Config.lock.loginScreen.loginArea.passwordInput.backgroundColor
+        opacity: Config.lock.loginScreen.loginArea.passwordInput.backgroundOpacity
         visible: true
     }
 
@@ -46,7 +56,7 @@ Rectangle {
 
         onStatusChanged: {
             if (status === Image.Error) {
-                source = Config.getIcon("user-default");
+                source = Config.lock.getIcon("user-default");
                 faceEffects.colorization = 1;
             }
         }
@@ -61,6 +71,7 @@ Rectangle {
             antialiasing: true
         }
     }
+
     MultiEffect {
         id: faceEffects
         anchors.fill: faceImage
@@ -72,7 +83,8 @@ Rectangle {
         maskThresholdMax: 1.0
         maskThresholdMin: 0.5
         colorization: 0
-        colorizationColor: avatar.strokeColor === Config.passwordInputBackgroundColor && (1.0 - Config.passwordInputBackgroundOpacity < 0.3) ? Config.passwordInputContentColor : avatar.strokeColor
+
+        colorizationColor: avatar.strokeColor === Config.lock.loginScreen.loginArea.passwordInput.backgroundColor && (1.0 - Config.lock.loginArea.passwordInput.backgroundOpacity < 0.3) ? Config.lock.loginArea.passwordInput.contentColor : avatar.strokeColor
     }
 
     Item {
@@ -141,7 +153,9 @@ Rectangle {
         ToolTip {
             id: toolTipControl
             parent: mouseArea
-            enabled: Config.tooltipsEnable && !Config.tooltipsDisableUser
+
+            // Tooltips Configs
+            enabled: Config.lock.tooltips.enable && !Config.lock.tooltips.disableUser
             property bool shouldShow: enabled && avatar.showTooltip || (enabled && mouseArea.isCursorInsideAvatar() && avatar.tooltipText !== "")
             visible: shouldShow
             delay: 300
@@ -150,18 +164,19 @@ Rectangle {
 
             contentItem: Text {
                 id: tooltipTextElement
-                font.family: Config.tooltipsFontFamily
-                font.pixelSize: Config.tooltipsFontSize * Config.generalScale
+                font.family: Config.lock.tooltips.fontFamily
+                font.pixelSize: Config.lock.tooltips.fontSize * Config.lock.generalScale
                 text: avatar.tooltipText
-                color: Config.tooltipsContentColor
+                color: Config.lock.tooltips.contentColor
             }
+
             background: Rectangle {
                 implicitWidth: tooltipTextElement.implicitWidth + (toolTipControl.leftPadding + toolTipControl.rightPadding)
                 implicitHeight: tooltipTextElement.implicitHeight + (toolTipControl.topPadding + toolTipControl.bottomPadding)
-                color: Config.tooltipsBackgroundColor
-                opacity: Config.tooltipsBackgroundOpacity
+                color: Config.lock.tooltips.backgroundColor
+                opacity: Config.lock.tooltips.backgroundOpacity
                 border.width: 0
-                radius: Config.tooltipsBorderRadius * Config.generalScale
+                radius: Config.lock.tooltips.borderRadius * Config.lock.generalScale
             }
         }
     }

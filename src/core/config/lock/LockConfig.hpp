@@ -1,5 +1,5 @@
 #pragma once
-#include "ConfigObject.hpp"
+#include "../ConfigObject.hpp"
 #include <QString>
 #include <QtQmlIntegration>
 
@@ -470,6 +470,9 @@ class LockConfig : public ConfigObject {
 
 public:
   explicit LockConfig(QObject *parent = nullptr);
+  Q_INVOKABLE QString getIcon(const QString &iconName) const;
 };
 
 } // namespace sitykha::config
+
+

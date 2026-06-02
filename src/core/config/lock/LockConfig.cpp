@@ -1,4 +1,5 @@
 #include "LockConfig.hpp"
+#include <QFileInfo>
 
 namespace sitykha::config {
 
@@ -95,6 +96,18 @@ LockConfig::LockConfig(QObject *parent) : ConfigObject(parent) {
   connect(m_lockScreen, &ConfigObject::modified, this, &LockConfig::modified);
   connect(m_loginScreen, &ConfigObject::modified, this, &LockConfig::modified);
   connect(m_tooltips, &ConfigObject::modified, this, &LockConfig::modified);
+}
+
+QString LockConfig::getIcon(const QString &iconName) const {
+  QFileInfo info(iconName);
+  QString finalName = iconName;
+
+  // If there is no extension (like .svg or .png), append .svg automatically
+  if (info.suffix().isEmpty()) {
+    finalName += ".svg";
+  }
+
+  return "../icons/" + finalName;
 }
 
 } // namespace sitykha::config

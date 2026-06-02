@@ -1,6 +1,6 @@
 #include "ConfigManager.hpp"
 #include "ConfigObject.hpp"
-#include "LockConfig.hpp"
+#include "lock/LockConfig.hpp"
 #include "qdebug.h"
 #include "qdir.h"
 #include "qfileinfo.h"
@@ -18,6 +18,7 @@ static Config *s_instance = nullptr;
 Config *Config::instance() {
   if (!s_instance) {
     s_instance = new Config();
+    s_instance->setup(QDir::homePath() + "/.config/sitykha/shell.json");
   }
   return s_instance;
 }

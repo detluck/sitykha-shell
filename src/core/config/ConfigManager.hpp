@@ -19,7 +19,7 @@ class Config : public ConfigObject {
   QML_ELEMENT
   QML_SINGLETON
 
-  Q_MOC_INCLUDE("LockConfig.hpp")
+  Q_MOC_INCLUDE("lock/LockConfig.hpp")
 
   CONFIG_SUBOBJECT(LockConfig, lock)
 
