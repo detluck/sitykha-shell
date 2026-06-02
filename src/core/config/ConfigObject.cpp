@@ -37,12 +37,14 @@ void sitykha::config::ConfigObject::loadJson(const QJsonObject &obj)
 
         //Check for nested sub-objects
         QVariant currentVal = prop.read(this);
-        if (auto* subObj = currentVal.value<sitykha::config::ConfigObject*>()) {
-            if (jsonVal.isObject()) {
-                qCDebug(lcConfig) << "  Recursing into sub-object" << key;
-                subObj->loadJson(jsonVal.toObject());
+        if (currentVal.canConvert<QObject*>()) {
+            if (auto* subObj = qobject_cast<sitykha::config::ConfigObject*>(currentVal.value<QObject*>())) {
+                if (jsonVal.isObject()) {
+                    qCDebug(lcConfig) << "  Recursing into sub-object" << key;
+                    subObj->loadJson(jsonVal.toObject());
+                }
+                continue;
             }
-            continue;
         }
 
         if(!prop.isWritable()) continue;
@@ -75,10 +77,12 @@ QJsonObject sitykha::config::ConfigObject::saveToJson() const
         QMetaProperty prop = meta->property(i);
         const auto key = QString::fromUtf8(prop.name());
         QVariant currentVal = prop.read(this);
-        if (auto* subObj = currentVal.value<sitykha::config::ConfigObject*>()) {
-            QJsonObject subJson = subObj->saveToJson();
-            if(!subJson.isEmpty()) obj.insert(key, subJson);
-            continue;
+        if (currentVal.canConvert<QObject*>()) {
+            if (auto* subObj = qobject_cast<sitykha::config::ConfigObject*>(currentVal.value<QObject*>())) {
+                QJsonObject subJson = subObj->saveToJson();
+                if(!subJson.isEmpty()) obj.insert(key, subJson);
+                continue;
+            }
         }
 
         if(!prop.isWritable()) continue;

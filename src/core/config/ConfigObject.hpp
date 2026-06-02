@@ -41,7 +41,7 @@ public:                                                                        \
   Q_SIGNAL void name##Changed();                                               \
                                                                                \
 private:                                                                       \
-  type m_##name __VA_OPT__(= __VA_ARGS__);
+  type m_##name = defaultVal;
 
 #define CONFIG_SUBOBJECT(type, name)                                           \
                                                                                \

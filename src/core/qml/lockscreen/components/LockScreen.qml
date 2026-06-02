@@ -85,7 +85,7 @@ Item {
 
             Image {
                 id: lockIcon
-                source: Config.lock.getIcon(Config.lock.lockScreen.message.icon)
+                source: "file:///home/detluck/Projects/sitykha-shell/assets/icons/" + (Config.lock.lockScreen.message.icon || "enter.svg")
                 width: Config.lock.lockScreen.message.iconSize * Config.lock.generalScale
                 height: width
                 sourceSize: Qt.size(width, height)

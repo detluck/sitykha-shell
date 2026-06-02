@@ -150,12 +150,12 @@ class PasswordInputConfig : public ConfigObject {
   CONFIG_PROPERTY(QString, backgroundColor,
                   "#FFFFFF") // @desc:Background color.
   CONFIG_PROPERTY(double, backgroundOpacity,
-                  0.0)                // @desc:Opacity of the background.
-  CONFIG_PROPERTY(int, borderSize, 0) // @desc:Size of the border.
+                  0.15)                // @desc:Opacity of the background.
+  CONFIG_PROPERTY(int, borderSize, 1) // @desc:Size of the border.
   CONFIG_PROPERTY(QString, borderColor, "#FFFFFF") // @desc:Color of the border.
-  CONFIG_PROPERTY(int, borderRadiusLeft, 0)        // @desc:Left border radius.
-  CONFIG_PROPERTY(int, borderRadiusRight, 0)       // @desc:Right border radius.
-  CONFIG_PROPERTY(int, marginTop, 0) // @desc:Distance from the username.
+  CONFIG_PROPERTY(int, borderRadiusLeft, 8)        // @desc:Left border radius.
+  CONFIG_PROPERTY(int, borderRadiusRight, 8)       // @desc:Right border radius.
+  CONFIG_PROPERTY(int, marginTop, 15) // @desc:Distance from the username.
   CONFIG_PROPERTY(QString, maskedCharacter,
                   "●") // @desc:Customized masked character.
 public:
@@ -168,11 +168,11 @@ class LoginButtonConfig : public ConfigObject {
   CONFIG_PROPERTY(QString, backgroundColor,
                   "#FFFFFF") // @desc:Background color of the login button.
   CONFIG_PROPERTY(double, backgroundOpacity,
-                  0.0) // @desc:Opacity of the background.
+                  0.15) // @desc:Opacity of the background.
   CONFIG_PROPERTY(QString, activeBackgroundColor,
                   "#FFFFFF") // @desc:Background color when hovered/focused.
   CONFIG_PROPERTY(double, activeBackgroundOpacity,
-                  0.0) // @desc:Opacity when hovered/focused.
+                  0.3) // @desc:Opacity when hovered/focused.
   CONFIG_PROPERTY(QString, icon,
                   "arrow-right.svg") // @desc:Icon in the login button
   CONFIG_PROPERTY(int, iconSize, 18) // @desc:Size of the icon.
@@ -181,11 +181,11 @@ class LoginButtonConfig : public ConfigObject {
   CONFIG_PROPERTY(
       QString, activeContentColor,
       "#FFFFFF") // @desc:Color of the icon/text when hovered/focused.
-  CONFIG_PROPERTY(int, borderSize, 0)              // @desc:Border size.
+  CONFIG_PROPERTY(int, borderSize, 1)              // @desc:Border size.
   CONFIG_PROPERTY(QString, borderColor, "#FFFFFF") // @desc:Border color.
-  CONFIG_PROPERTY(int, borderRadiusLeft, 0)        // @desc:Left border radius.
-  CONFIG_PROPERTY(int, borderRadiusRight, 0)       // @desc:Right border radius.
-  CONFIG_PROPERTY(int, marginLeft, 0) // @desc:Distance from the password field.
+  CONFIG_PROPERTY(int, borderRadiusLeft, 8)        // @desc:Left border radius.
+  CONFIG_PROPERTY(int, borderRadiusRight, 8)       // @desc:Right border radius.
+  CONFIG_PROPERTY(int, marginLeft, 10) // @desc:Distance from the password field.
   CONFIG_PROPERTY(bool, showTextIfNoPassword,
                   true) // @desc:Show label when password field is not visible.
   CONFIG_PROPERTY(bool, hideIfNotNeeded,

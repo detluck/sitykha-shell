@@ -214,9 +214,9 @@ Item {
                     Layout.alignment: Qt.AlignHCenter
                     enabled: loginScreen.state === "normal"
                     visible: loginScreen.userNeedsPassword
-                    icon: Config.lock.getIcon(Config.lock.loginScreen.loginArea.passwordInput.icon)
-                    eyeIconCl: Config.lock.getIcon("eye-cl")
-                    eyeIconO: Config.lock.getIcon("eye-o")
+                    icon: "file:///home/detluck/Projects/sitykha-shell/assets/icons/" + (Config.lock.loginScreen.loginArea.passwordInput.icon || "password.svg")
+                    eyeIconCl: "file:///home/detluck/Projects/sitykha-shell/assets/icons/eye-cl.svg"
+                    eyeIconO: "file:///home/detluck/Projects/sitykha-shell/assets/icons/eye-o.svg"
                     placeholder: "Password"
                     isPassword: true
                     splitBorderRadius: true
@@ -234,7 +234,7 @@ Item {
                     visible: !Config.lock.loginScreen.loginArea.loginButton.hideIfNotNeeded || !loginScreen.userNeedsPassword
                     enabled: loginScreen.state !== "authenticating"
                     activeFocusOnTab: true
-                    icon: Config.lock.getIcon(Config.lock.loginScreen.loginArea.loginButton.icon)
+                    icon: "file:///home/detluck/Projects/sitykha-shell/assets/icons/" + (Config.lock.loginScreen.loginArea.loginButton.icon || "arrow-right.svg")
                     label: "Login"
                     showLabel: Config.lock.loginScreen.loginArea.loginButton.showTextIfNoPassword && !loginScreen.userNeedsPassword
                     tooltipText: !Config.lock.tooltips.disableLoginButton && (!Config.lock.loginScreen.loginArea.loginButton.showTextIfNoPassword || loginScreen.userNeedsPassword) ? "Login" : ""

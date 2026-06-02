@@ -94,7 +94,7 @@ ColumnLayout {
 
                     Image {
                         anchors.centerIn: parent
-                        source: shortName && shortName.length > 0 ? `/usr/share/sddm/flags/${shortName}.png` : Config.getIcon("language")
+                        source: shortName && shortName.length > 0 ? `/usr/share/sddm/flags/${shortName}.png` : "file:///home/detluck/Projects/sitykha-shell/assets/icons/language.svg"
                         width: Config.menuAreaPopupsIconSize * Config.generalScale
                         height: width
                         sourceSize: Qt.size(width, height)

@@ -38,7 +38,7 @@ Item {
 
     Image {
         id: spinner
-        source: Config.lock.getIcon(Config.lock.loginScreen.loginArea.spinner.icon)
+        source: "file:///home/detluck/Projects/sitykha-shell/assets/icons/" + (Config.lock.loginScreen.loginArea.spinner.icon || "spinner.svg")
         width: Config.lock.loginScreen.loginArea.spinner.iconSize * Config.lock.generalScale
         height: width
         sourceSize.width: width

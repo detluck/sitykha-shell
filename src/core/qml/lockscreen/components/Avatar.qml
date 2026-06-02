@@ -56,7 +56,7 @@ Rectangle {
 
         onStatusChanged: {
             if (status === Image.Error) {
-                source = Config.lock.getIcon("user-default");
+                source = "file:///home/detluck/Projects/sitykha-shell/assets/icons/user-default.svg";
                 faceEffects.colorization = 1;
             }
         }

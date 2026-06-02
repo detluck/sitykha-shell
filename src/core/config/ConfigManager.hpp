@@ -30,6 +30,7 @@ public:
   static Config *create(QQmlEngine *, QJSEngine *);
 
   void setup(const QString &filePath);
+  Q_INVOKABLE QString getIcon(const QString &iconName) const;
 
 public slots:
   void save();

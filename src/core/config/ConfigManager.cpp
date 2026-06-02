@@ -18,7 +18,6 @@ static Config *s_instance = nullptr;
 Config *Config::instance() {
   if (!s_instance) {
     s_instance = new Config();
-    s_instance->setup(QDir::homePath() + "/.config/sitykha/shell.json");
   }
   return s_instance;
 }
@@ -26,9 +25,14 @@ Config *Config::instance() {
 Config *Config::create(QQmlEngine *, QJSEngine *) { return instance(); }
 
 Config::Config(QObject *parent) : ConfigObject(parent) {
+  if (!s_instance) {
+    s_instance = this;
+  }
   m_lock = new LockConfig(this);
 
   connect(m_lock, &ConfigObject::modified, this, &Config::save);
+
+  setup(QDir::homePath() + "/.config/sitykha/shell.json");
 }
 
 void sitykha::config::Config::setup(const QString &path) {
@@ -44,7 +48,12 @@ void sitykha::config::Config::setup(const QString &path) {
 
   m_watcher = new QFileSystemWatcher(this);
   m_watcher->addPath(m_watchedDir);
+  if (QFile::exists(m_filePath)) {
+    m_watcher->addPath(m_filePath);
+  }
   connect(m_watcher, &QFileSystemWatcher::directoryChanged, this,
+          &Config::onWatcherEvent);
+  connect(m_watcher, &QFileSystemWatcher::fileChanged, this,
           &Config::onWatcherEvent);
 
   m_saveTimer = new QTimer(this);
@@ -164,12 +173,21 @@ void Config::updateFileWatch() {
   if (!dirs.contains(m_watchedDir)) {
     m_watcher->addPath(m_watchedDir);
   }
+  QStringList files = m_watcher->files();
+  if (QFile::exists(m_filePath) && !files.contains(m_filePath)) {
+    m_watcher->addPath(m_filePath);
+  }
 }
 
 void Config::onWatcherEvent() {
   if (m_recentlySaved)
     return;
+  updateFileWatch();
   m_reloadTimer->start();
+}
+
+QString Config::getIcon(const QString &iconName) const {
+  return m_lock->getIcon(iconName);
 }
 
 } // namespace sitykha::config

@@ -114,7 +114,7 @@ Window {
             Image {
                 id: backgroundImage
                 anchors.fill: parent
-                source: !backgroundManager.isVideo ? Config.lock.getIcon(backgroundManager.currentSource) : ""
+                source: !backgroundManager.isVideo ? "file:///home/detluck/Projects/sitykha-shell/assets/backgrounds/" + (backgroundManager.currentSource || "sunset.jpg") : ""
                 cache: true
                 mipmap: true
                 visible: !backgroundManager.displayColor && !backgroundManager.isVideo
@@ -127,8 +127,9 @@ Window {
                 }
                 onStatusChanged: {
                     if (status === Image.Error) {
-                        if (source !== "backgrounds/default.jpg" && source !== "") {
-                            source = "backgrounds/default.jpg";
+                        var fallback = "file:///home/detluck/Projects/sitykha-shell/assets/backgrounds/sunset.jpg";
+                        if (source !== fallback && source !== "") {
+                            source = fallback;
                         }
                     }
                 }
@@ -148,7 +149,7 @@ Window {
                 audioOutput: AudioOutput {
                     muted: true
                 }
-                source: backgroundManager.isVideo && backgroundManager.currentSource.length > 0 ? Config.getIcon(backgroundManager.currentSource) : ""
+                source: backgroundManager.isVideo && backgroundManager.currentSource.length > 0 ? "file:///home/detluck/Projects/sitykha-shell/assets/backgrounds/" + backgroundManager.currentSource : ""
                 loops: MediaPlayer.Infinite
                 onSourceChanged: {
                     if (source.toString().length > 0) {

@@ -22,7 +22,7 @@ ColumnLayout {
         focus: selector.visible
         width: Layout.preferredWidth
         enabled: sddm.canSuspend
-        icon: Config.getIcon("power-suspend.svg")
+        icon: "file:///home/detluck/Projects/sitykha-shell/assets/icons/power-suspend.svg"
         contentColor: Config.menuAreaPopupsContentColor
         activeContentColor: Config.menuAreaPopupsActiveContentColor
         fontFamily: Config.menuAreaPopupsFontFamily
@@ -51,7 +51,7 @@ ColumnLayout {
         focus: selector.visible
         width: Layout.preferredWidth
         enabled: sddm.canReboot
-        icon: Config.getIcon("power-reboot.svg")
+        icon: "file:///home/detluck/Projects/sitykha-shell/assets/icons/power-reboot.svg"
         contentColor: Config.menuAreaPopupsContentColor
         activeContentColor: Config.menuAreaPopupsActiveContentColor
         fontFamily: Config.menuAreaPopupsFontFamily
@@ -80,7 +80,7 @@ ColumnLayout {
         focus: selector.visible
         width: Layout.preferredWidth
         enabled: sddm.canPowerOff
-        icon: Config.getIcon("power.svg")
+        icon: "file:///home/detluck/Projects/sitykha-shell/assets/icons/power.svg"
         contentColor: Config.menuAreaPopupsContentColor
         activeContentColor: Config.menuAreaPopupsActiveContentColor
         fontFamily: Config.menuAreaPopupsFontFamily

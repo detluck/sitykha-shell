@@ -106,7 +106,7 @@ Item {
             property bool showLabel: Config.layoutDisplayLayoutName
 
             height: Config.menuAreaButtonsSize * Config.generalScale
-            icon: Config.getIcon(Config.layoutIcon)
+            icon: "file:///home/detluck/Projects/sitykha-shell/assets/icons/language.svg"
             active: popup.visible
             borderRadius: Config.menuAreaButtonsBorderRadius
             borderSize: Config.layoutBorderSize
@@ -217,7 +217,7 @@ Item {
 
             height: Config.menuAreaButtonsSize * Config.generalScale
             width: Config.menuAreaButtonsSize * Config.generalScale
-            icon: Config.getIcon(Config.keyboardIcon)
+            icon: "file:///home/detluck/Projects/sitykha-shell/assets/icons/keyboard.svg"
             iconSize: Config.keyboardIconSize
             backgroundColor: Config.keyboardBackgroundColor
             backgroundOpacity: Config.keyboardBackgroundOpacity
@@ -247,7 +247,7 @@ Item {
 
             height: Config.menuAreaButtonsSize * Config.generalScale
             width: Config.menuAreaButtonsSize * Config.generalScale
-            icon: Config.getIcon(Config.powerIcon)
+            icon: "file:///home/detluck/Projects/sitykha-shell/assets/icons/power.svg"
             iconSize: Config.powerIconSize
             contentColor: Config.powerContentColor
             activeContentColor: Config.powerActiveContentColor
