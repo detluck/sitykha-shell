@@ -148,7 +148,7 @@ Item {
 
         Item {
             id: loginLayout
-            height: activeUserName.height + Config.lock.loginScreen.loginArea.passwordInput.marginTop + loginArea.height
+            height: (userAvatar.visible && (Config.lock.loginScreen.loginArea.position !== "left" && Config.lock.loginScreen.loginArea.position !== "right") ? (userAvatar.height + Config.lock.loginScreen.loginArea.username.margin) : 0) + activeUserName.height + Config.lock.loginScreen.loginArea.passwordInput.marginTop + loginArea.height
             width: loginArea.width > activeUserName.width ? loginArea.width : activeUserName.width
 
             Component.onCompleted: {
@@ -164,6 +164,26 @@ Item {
                 }
             }
 
+            Avatar {
+                id: userAvatar
+                width: Config.lock.loginScreen.loginArea.avatar.activeSize
+                height: width
+                source: loginScreen.userIcon || Pathes.getIcon("user-default.svg", "lock")
+                visible: Config.lock.loginScreen.loginArea.avatar.display
+                Component.onCompleted: {
+                    if (Config.lock.loginScreen.loginArea.position === "left") {
+                        anchors.left = parent.left;
+                        anchors.verticalCenter = parent.verticalCenter;
+                    } else if (Config.lock.loginScreen.loginArea.position === "right") {
+                        anchors.right = parent.right;
+                        anchors.verticalCenter = parent.verticalCenter;
+                    } else {
+                        anchors.top = parent.top;
+                        anchors.horizontalCenter = parent.horizontalCenter;
+                    }
+                }
+            }
+
             Text {
                 id: activeUserName
                 font.family: Config.lock.loginScreen.loginArea.username.fontFamily
@@ -173,12 +193,15 @@ Item {
                 text: loginScreen.userRealName || loginScreen.userName
 
                 Component.onCompleted: {
-                    anchors.top = parent.top;
                     if (Config.lock.loginScreen.loginArea.position === "left") {
+                        anchors.top = parent.top;
                         anchors.left = parent.left;
                     } else if (Config.lock.loginScreen.loginArea.position === "right") {
+                        anchors.top = parent.top;
                         anchors.right = parent.right;
                     } else {
+                        anchors.top = userAvatar.visible ? userAvatar.bottom : parent.top;
+                        anchors.topMargin = userAvatar.visible ? Config.lock.loginScreen.loginArea.username.margin : 0;
                         anchors.horizontalCenter = parent.horizontalCenter;
                     }
                 }

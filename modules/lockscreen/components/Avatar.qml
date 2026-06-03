@@ -11,13 +11,13 @@ Rectangle {
     property string source: ""
     property bool active: false
 
-    property int squareRadius: (shape == "circle") ? this.width : (Config.lock.loginScreen.loginArea.avatar.borderRadius === 0 ? 1 : Config.lock.loginArea.avatar.borderRadius * Config.lock.generalScale) // min: 1
+    property int squareRadius: (shape == "circle") ? this.width : (Config.lock.loginScreen.loginArea.avatar.borderRadius === 0 ? 1 : Config.lock.loginScreen.loginArea.avatar.borderRadius * Config.lock.generalScale) // min: 1
 
-    property bool drawStroke: (active && Config.lock.loginScreen.loginArea.avatar.activeBorderSize > 0) || (!active && Config.lock.loginArea.avatar.inactiveBorderSize > 0)
+    property bool drawStroke: (active && Config.lock.loginScreen.loginArea.avatar.activeBorderSize > 0) || (!active && Config.lock.loginScreen.loginArea.avatar.inactiveBorderSize > 0)
 
-    property color strokeColor: active ? Config.lock.loginScreen.loginArea.avatar.activeBorderColor : Config.lock.loginArea.avatar.inactiveBorderColor
+    property color strokeColor: active ? Config.lock.loginScreen.loginArea.avatar.activeBorderColor : Config.lock.loginScreen.loginArea.avatar.inactiveBorderColor
 
-    property int strokeSize: active ? (Config.lock.loginScreen.loginArea.avatar.activeBorderSize * Config.lock.generalScale) : (Config.lock.loginArea.avatar.inactiveBorderSize * Config.lock.generalScale)
+    property int strokeSize: active ? (Config.lock.loginScreen.loginArea.avatar.activeBorderSize * Config.lock.generalScale) : (Config.lock.loginScreen.loginArea.avatar.inactiveBorderSize * Config.lock.generalScale)
 
     property string tooltipText: ""
     property bool showTooltip: false
@@ -81,7 +81,7 @@ Rectangle {
         maskThresholdMin: 0.5
         colorization: 0
 
-        colorizationColor: avatar.strokeColor === Config.lock.loginScreen.loginArea.passwordInput.backgroundColor && (1.0 - Config.lock.loginArea.passwordInput.backgroundOpacity < 0.3) ? Config.lock.loginArea.passwordInput.contentColor : avatar.strokeColor
+        colorizationColor: avatar.strokeColor === Config.lock.loginScreen.loginArea.passwordInput.backgroundColor && (1.0 - Config.lock.loginScreen.loginArea.passwordInput.backgroundOpacity < 0.3) ? Config.lock.loginArea.passwordInput.contentColor : avatar.strokeColor
     }
 
     Item {

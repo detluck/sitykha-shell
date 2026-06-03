@@ -186,8 +186,4 @@ void Config::onWatcherEvent() {
   m_reloadTimer->start();
 }
 
-QString Config::getIcon(const QString &iconName) const {
-  return m_lock->getIcon(iconName);
-}
-
 } // namespace sitykha::config

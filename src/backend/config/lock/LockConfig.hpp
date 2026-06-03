@@ -94,6 +94,8 @@ public:
 class AvatarConfig : public ConfigObject {
   Q_OBJECT
   QML_ANONYMOUS
+  CONFIG_PROPERTY(bool, display,
+                  true) // @desc:Whether or not to display user avatars.
   CONFIG_PROPERTY(
       QString, shape,
       "circle") // @possible:'circle' || 'square' @desc:Shape of the avatar.
