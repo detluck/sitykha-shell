@@ -1,6 +1,6 @@
 import QtQuick
 import Quickshell
-import "src/core/qml/lockscreen"
+import Sitykha.Core
 
 ShellRoot {
     id: root

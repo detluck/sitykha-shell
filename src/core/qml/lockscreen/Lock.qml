@@ -5,7 +5,6 @@ import QtQuick.Effects
 import QtMultimedia
 import Quickshell.Services.Pam
 import Sitykha.Core
-import "components"
 
 Window {
     id: root
