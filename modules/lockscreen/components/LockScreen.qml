@@ -2,7 +2,7 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Effects
 import QtQuick.Layouts
-import Sitykha.Core
+import Sitykha.Backend
 
 Item {
     id: lockScreen

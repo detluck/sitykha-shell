@@ -4,7 +4,8 @@ import QtQuick
 import QtQuick.Effects
 import QtMultimedia
 import Quickshell.Services.Pam
-import Sitykha.Core
+import Sitykha.Backend
+import qs.modules.lockscreen.components
 
 Window {
     id: root

@@ -3,7 +3,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Effects
 import QtQuick.Layouts
-import Sitykha.Core
+import Sitykha.Backend
 
 Item {
     id: iconButton

@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Effects
-import Sitykha.Core
+import Sitykha.Backend
 
 Item {
     id: spinnerContainer

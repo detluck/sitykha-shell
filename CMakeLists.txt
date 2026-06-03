@@ -7,7 +7,7 @@ if(NOT DEFINED VERSION)
         OUTPUT_STRIP_TRAILING_WHITESPACE
     )
   if("${VERSION}" STREQUAL "")
-    set(VERSION "0.1.0")  # fallback if no tags yet
+    set(VERSION "0.1.0")
   endif()
 endif()
 
@@ -21,7 +21,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-set(ENABLE_MODULES "core;shell" CACHE STRING "Modules to build/install")
+set(ENABLE_MODULES "backend;shell" CACHE STRING "Modules to build/install")
 set(INSTALL_QMLDIR "usr/lib/qt6/qml" CACHE STRING "QML module install dir")
 set(INSTALL_QSCONFDIR "etc/xdg/quickshell/sitykha" CACHE STRING "Quickshell config install dir")
 
@@ -40,11 +40,14 @@ endif()
 find_package(Qt6 6.6 REQUIRED COMPONENTS Core Qml Quick DBus)
 qt_standard_project_setup(REQUIRES 6.6)
 
-if("core" IN_LIST ENABLE_MODULES)
-  add_subdirectory(src/core)
+if("backend" IN_LIST ENABLE_MODULES)
+  add_subdirectory(src/backend)
 endif()
 
 if("shell" IN_LIST ENABLE_MODULES)
-  install(DIRECTORY assets DESTINATION "${INSTALL_QSCONFDIR}")
+  foreach(dir modules services assets)
+    install(DIRECTORY ${dir} DESTINATION "${INSTALL_QSCONFDIR}")
+  endforeach()
+
   install(FILES shell.qml DESTINATION "${INSTALL_QSCONFDIR}")
 endif()

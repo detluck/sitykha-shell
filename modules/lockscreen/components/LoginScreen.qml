@@ -3,7 +3,7 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.Services.Pam
-import Sitykha.Core
+import Sitykha.Backend
 
 Item {
     id: loginScreen

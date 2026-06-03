@@ -2,7 +2,7 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Effects
 import QtQuick.Controls
-import Sitykha.Core
+import Sitykha.Backend
 
 Rectangle {
     id: avatar
