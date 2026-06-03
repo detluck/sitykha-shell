@@ -1,7 +1,7 @@
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Effects
 import Sitykha.Backend
+import qs.services
 
 Item {
     id: spinnerContainer
@@ -38,7 +38,7 @@ Item {
 
     Image {
         id: spinner
-        source: "file:///home/detluck/Projects/sitykha-shell/assets/icons/" + (Config.lock.loginScreen.loginArea.spinner.icon || "spinner.svg")
+        source: Pathes.getIcon(Config.lock.loginScreen.loginArea.spinner.icon || "spinner.svg", "lock")
         width: Config.lock.loginScreen.loginArea.spinner.iconSize * Config.lock.generalScale
         height: width
         sourceSize.width: width

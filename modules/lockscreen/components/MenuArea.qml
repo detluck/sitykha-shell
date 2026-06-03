@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import qs.services
 
 Item {
     id: menuArea
@@ -106,7 +107,7 @@ Item {
             property bool showLabel: Config.layoutDisplayLayoutName
 
             height: Config.menuAreaButtonsSize * Config.generalScale
-            icon: "file:///home/detluck/Projects/sitykha-shell/assets/icons/language.svg"
+            icon: Pathes.getIcon("language.svg", "lock")
             active: popup.visible
             borderRadius: Config.menuAreaButtonsBorderRadius
             borderSize: Config.layoutBorderSize
@@ -217,7 +218,7 @@ Item {
 
             height: Config.menuAreaButtonsSize * Config.generalScale
             width: Config.menuAreaButtonsSize * Config.generalScale
-            icon: "file:///home/detluck/Projects/sitykha-shell/assets/icons/keyboard.svg"
+            icon: Pathes.getIcon("keyboard.svg", "lock")
             iconSize: Config.keyboardIconSize
             backgroundColor: Config.keyboardBackgroundColor
             backgroundOpacity: Config.keyboardBackgroundOpacity
@@ -247,7 +248,7 @@ Item {
 
             height: Config.menuAreaButtonsSize * Config.generalScale
             width: Config.menuAreaButtonsSize * Config.generalScale
-            icon: "file:///home/detluck/Projects/sitykha-shell/assets/icons/power.svg"
+            icon: Pathes.getIcon("power.svg", "lock")
             iconSize: Config.powerIconSize
             contentColor: Config.powerContentColor
             activeContentColor: Config.powerActiveContentColor

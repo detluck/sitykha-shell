@@ -1,6 +1,8 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import Sitykha.Backend
+import qs.services
 
 ColumnLayout {
     id: selector
@@ -94,7 +96,7 @@ ColumnLayout {
 
                     Image {
                         anchors.centerIn: parent
-                        source: shortName && shortName.length > 0 ? `/usr/share/sddm/flags/${shortName}.png` : "file:///home/detluck/Projects/sitykha-shell/assets/icons/language.svg"
+                        source: shortName && shortName.length > 0 ? `/usr/share/sddm/flags/${shortName}.png` : Pathes.getIcon("language.svg", "lock")
                         width: Config.menuAreaPopupsIconSize * Config.generalScale
                         height: width
                         sourceSize: Qt.size(width, height)

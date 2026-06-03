@@ -4,6 +4,7 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell.Services.Pam
 import Sitykha.Backend
+import qs.services
 
 Item {
     id: loginScreen
@@ -36,12 +37,10 @@ Item {
     readonly property alias loginButton: loginButton
     readonly property alias loginContainer: loginContainer
 
-    // --- SINGLE USER CONFIGURATION ---
     property string userName: "detluck"
     property string userRealName: "Pavlo Sytnyk"
     property bool userNeedsPassword: true
 
-    // --- QUICKSHELL PAM LOGIN LOGIC ---
     function login() {
         if (userName !== "" && password.text !== "") {
             safeStateChange("authenticating");
@@ -57,13 +56,10 @@ Item {
     Connections {
         target: loginScreen.pamAuth
 
-        // 1. PAM sends a message or asks for input
         function onPamMessage() {
             if (loginScreen.pamAuth.responseRequired) {
-                // PAM is asking for the password, give it to them
                 loginScreen.pamAuth.respond(password.text);
             } else if (loginScreen.pamAuth.message !== "") {
-                // PAM just wants to show a message (like "Welcome" or a warning)
                 if (loginScreen.pamAuth.messageIsError) {
                     loginMessage.warn(loginScreen.pamAuth.message, "error");
                 } else {
@@ -72,7 +68,6 @@ Item {
             }
         }
 
-        // 2. PAM finishes processing the password
         function onCompleted(result) {
             if (result === PamResult.Success) {
                 loginContainer.scale = 0.0;
@@ -85,7 +80,6 @@ Item {
             }
         }
 
-        // 3. System-level PAM error (missing config, root permission issue, etc.)
         function onError(error) {
             loginScreen.safeStateChange("normal");
             loginMessage.warn("Internal PAM Error", "error");
@@ -109,7 +103,6 @@ Item {
         }
     }
 
-    // --- UI LAYOUT ---
     Item {
         id: loginContainer
 
@@ -214,9 +207,9 @@ Item {
                     Layout.alignment: Qt.AlignHCenter
                     enabled: loginScreen.state === "normal"
                     visible: loginScreen.userNeedsPassword
-                    icon: "file:///home/detluck/Projects/sitykha-shell/assets/icons/" + (Config.lock.loginScreen.loginArea.passwordInput.icon || "password.svg")
-                    eyeIconCl: "file:///home/detluck/Projects/sitykha-shell/assets/icons/eye-cl.svg"
-                    eyeIconO: "file:///home/detluck/Projects/sitykha-shell/assets/icons/eye-o.svg"
+                    icon: Pathes.getIcon(Config.lock.loginScreen.loginArea.passwordInput.icon || "password.svg", "lock")
+                    eyeIconCl: Pathes.getIcon("eye-cl.svg", "lock")
+                    eyeIconO: Pathes.getIcon("eye-o.svg", "lock")
                     placeholder: "Password"
                     isPassword: true
                     splitBorderRadius: true
@@ -234,7 +227,7 @@ Item {
                     visible: !Config.lock.loginScreen.loginArea.loginButton.hideIfNotNeeded || !loginScreen.userNeedsPassword
                     enabled: loginScreen.state !== "authenticating"
                     activeFocusOnTab: true
-                    icon: "file:///home/detluck/Projects/sitykha-shell/assets/icons/" + (Config.lock.loginScreen.loginArea.loginButton.icon || "arrow-right.svg")
+                    icon: Pathes.getIcon(Config.lock.loginScreen.loginArea.loginButton.icon || "arrow-right.svg", "lock")
                     label: "Login"
                     showLabel: Config.lock.loginScreen.loginArea.loginButton.showTextIfNoPassword && !loginScreen.userNeedsPassword
                     tooltipText: !Config.lock.tooltips.disableLoginButton && (!Config.lock.loginScreen.loginArea.loginButton.showTextIfNoPassword || loginScreen.userNeedsPassword) ? "Login" : ""

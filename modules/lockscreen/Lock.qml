@@ -6,6 +6,7 @@ import QtMultimedia
 import Quickshell.Services.Pam
 import Sitykha.Backend
 import qs.modules.lockscreen.components
+import qs.services
 
 Window {
     id: root
@@ -16,7 +17,6 @@ Window {
     title: "Sitykha Shell - Lock Container Test"
     color: "#000000"
 
-    // Diese Properties bleiben im Window, da sie globale Werte für den MultiEffect sind
     property bool capsLockOn: false
     property real blurMax: 0.0
     property real brightness: 0.0
@@ -27,12 +27,10 @@ Window {
         config: "login"
     }
 
-    // Main surface frame
     Item {
         id: mainFrame
         anchors.fill: parent
 
-        // 1. STATE LOGIK HIERHER VERSCHOBEN
         state: Config.lock.lockScreen.display ? "lockState" : "loginState"
 
         states: [
@@ -96,7 +94,6 @@ Window {
             id: backgroundManager
             anchors.fill: parent
 
-            // 2. root.state DURCH mainFrame.state ERSETZT
             readonly property string currentSource: mainFrame.state === "lockState" ? Config.lock.lockScreen.background : Config.lock.loginScreen.background
             readonly property bool isVideo: {
                 if (currentSource.length === 0)
@@ -107,14 +104,13 @@ Window {
                 var ext = parts[parts.length - 1].toLowerCase();
                 return ["avi", "mp4", "mov", "mkv", "m4v", "webm"].indexOf(ext) !== -1;
             }
-            // root.state DURCH mainFrame.state ERSETZT
             readonly property bool displayColor: mainFrame.state === "lockState" && Config.lock.lockScreen.useBackgroundColor || mainFrame.state === "loginState" && Config.lock.loginScreen.useBackgroundColor
             readonly property string placeholder: Config.lock.animatedBackgroundPlaceholder
 
             Image {
                 id: backgroundImage
                 anchors.fill: parent
-                source: !backgroundManager.isVideo ? "file:///home/detluck/Projects/sitykha-shell/assets/backgrounds/" + (backgroundManager.currentSource || "sunset.jpg") : ""
+                source: !backgroundManager.isVideo ? Pathes.getWallpaper(backgroundManager.currentSource || "default.jpg") : ""
                 cache: true
                 mipmap: true
                 visible: !backgroundManager.displayColor && !backgroundManager.isVideo
@@ -127,7 +123,7 @@ Window {
                 }
                 onStatusChanged: {
                     if (status === Image.Error) {
-                        var fallback = "file:///home/detluck/Projects/sitykha-shell/assets/backgrounds/sunset.jpg";
+                        var fallback = Pathes.getWallpaper("default.jpg");
                         if (source !== fallback && source !== "") {
                             source = fallback;
                         }
@@ -149,7 +145,7 @@ Window {
                 audioOutput: AudioOutput {
                     muted: true
                 }
-                source: backgroundManager.isVideo && backgroundManager.currentSource.length > 0 ? "file:///home/detluck/Projects/sitykha-shell/assets/backgrounds/" + backgroundManager.currentSource : ""
+                source: backgroundManager.isVideo && backgroundManager.currentSource.length > 0 ? Pathes.getWallpaper(backgroundManager.currentSource) : ""
                 loops: MediaPlayer.Infinite
                 onSourceChanged: {
                     if (source.toString().length > 0) {

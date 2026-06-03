@@ -98,39 +98,4 @@ LockConfig::LockConfig(QObject *parent) : ConfigObject(parent) {
   connect(m_tooltips, &ConfigObject::modified, this, &LockConfig::modified);
 }
 
-QString LockConfig::getIcon(const QString &iconName) const {
-  if (iconName.isEmpty()) {
-    return "";
-  }
-  if (iconName.startsWith("file://")) {
-    return iconName;
-  }
-
-  QFileInfo info(iconName);
-  QString finalName = iconName;
-
-  // Clean up prefix directories if already present
-  if (finalName.startsWith("backgrounds/")) {
-    finalName.remove(0, 12);
-  } else if (finalName.startsWith("icons/")) {
-    finalName.remove(0, 6);
-  }
-
-  // If there is no extension (like .svg or .png), append .svg automatically
-  if (info.suffix().isEmpty()) {
-    finalName += ".svg";
-  }
-
-  QString basePath = "/home/detluck/Projects/sitykha-shell/assets/";
-
-  // Check if file exists in backgrounds folder
-  QFileInfo bgCheck(basePath + "backgrounds/" + finalName);
-  if (bgCheck.exists() && bgCheck.isFile()) {
-    return "file://" + basePath + "backgrounds/" + finalName;
-  }
-
-  // Otherwise assume it is in icons folder
-  return "file://" + basePath + "icons/" + finalName;
-}
-
 } // namespace sitykha::config

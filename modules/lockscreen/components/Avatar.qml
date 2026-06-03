@@ -3,6 +3,7 @@ import QtQuick
 import QtQuick.Effects
 import QtQuick.Controls
 import Sitykha.Backend
+import qs.services
 
 Rectangle {
     id: avatar
@@ -10,16 +11,12 @@ Rectangle {
     property string source: ""
     property bool active: false
 
-    // Config.lock.generalScale und Config.lock.loginArea.avatar.borderRadius
     property int squareRadius: (shape == "circle") ? this.width : (Config.lock.loginScreen.loginArea.avatar.borderRadius === 0 ? 1 : Config.lock.loginArea.avatar.borderRadius * Config.lock.generalScale) // min: 1
 
-    // Config.lock.loginArea.avatar.activeBorderSize / inactiveBorderSize
     property bool drawStroke: (active && Config.lock.loginScreen.loginArea.avatar.activeBorderSize > 0) || (!active && Config.lock.loginArea.avatar.inactiveBorderSize > 0)
 
-    // Config.lock.loginArea.avatar.activeBorderColor / inactiveBorderColor
     property color strokeColor: active ? Config.lock.loginScreen.loginArea.avatar.activeBorderColor : Config.lock.loginArea.avatar.inactiveBorderColor
 
-    // Stroke Size mit General Scale
     property int strokeSize: active ? (Config.lock.loginScreen.loginArea.avatar.activeBorderSize * Config.lock.generalScale) : (Config.lock.loginArea.avatar.inactiveBorderSize * Config.lock.generalScale)
 
     property string tooltipText: ""
@@ -56,7 +53,7 @@ Rectangle {
 
         onStatusChanged: {
             if (status === Image.Error) {
-                source = "file:///home/detluck/Projects/sitykha-shell/assets/icons/user-default.svg";
+                source = Pathes.getIcon("user-default.svg", "lock");
                 faceEffects.colorization = 1;
             }
         }

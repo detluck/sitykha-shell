@@ -150,7 +150,7 @@ class PasswordInputConfig : public ConfigObject {
   CONFIG_PROPERTY(QString, backgroundColor,
                   "#FFFFFF") // @desc:Background color.
   CONFIG_PROPERTY(double, backgroundOpacity,
-                  0.15)                // @desc:Opacity of the background.
+                  0.15)               // @desc:Opacity of the background.
   CONFIG_PROPERTY(int, borderSize, 1) // @desc:Size of the border.
   CONFIG_PROPERTY(QString, borderColor, "#FFFFFF") // @desc:Color of the border.
   CONFIG_PROPERTY(int, borderRadiusLeft, 8)        // @desc:Left border radius.
@@ -185,7 +185,8 @@ class LoginButtonConfig : public ConfigObject {
   CONFIG_PROPERTY(QString, borderColor, "#FFFFFF") // @desc:Border color.
   CONFIG_PROPERTY(int, borderRadiusLeft, 8)        // @desc:Left border radius.
   CONFIG_PROPERTY(int, borderRadiusRight, 8)       // @desc:Right border radius.
-  CONFIG_PROPERTY(int, marginLeft, 10) // @desc:Distance from the password field.
+  CONFIG_PROPERTY(int, marginLeft,
+                  10) // @desc:Distance from the password field.
   CONFIG_PROPERTY(bool, showTextIfNoPassword,
                   true) // @desc:Show label when password field is not visible.
   CONFIG_PROPERTY(bool, hideIfNotNeeded,
@@ -470,9 +471,6 @@ class LockConfig : public ConfigObject {
 
 public:
   explicit LockConfig(QObject *parent = nullptr);
-  Q_INVOKABLE QString getIcon(const QString &iconName) const;
 };
 
 } // namespace sitykha::config
-
-

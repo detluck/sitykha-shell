@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import qs.services
 
 ColumnLayout {
     id: selector
@@ -22,7 +23,7 @@ ColumnLayout {
         focus: selector.visible
         width: Layout.preferredWidth
         enabled: sddm.canSuspend
-        icon: "file:///home/detluck/Projects/sitykha-shell/assets/icons/power-suspend.svg"
+        icon: Pathes.getIcon("power-suspend.svg", "lock")
         contentColor: Config.menuAreaPopupsContentColor
         activeContentColor: Config.menuAreaPopupsActiveContentColor
         fontFamily: Config.menuAreaPopupsFontFamily
@@ -51,7 +52,7 @@ ColumnLayout {
         focus: selector.visible
         width: Layout.preferredWidth
         enabled: sddm.canReboot
-        icon: "file:///home/detluck/Projects/sitykha-shell/assets/icons/power-reboot.svg"
+        icon: Pathes.getIcon("power-reboot.svg", "lock")
         contentColor: Config.menuAreaPopupsContentColor
         activeContentColor: Config.menuAreaPopupsActiveContentColor
         fontFamily: Config.menuAreaPopupsFontFamily
@@ -80,7 +81,7 @@ ColumnLayout {
         focus: selector.visible
         width: Layout.preferredWidth
         enabled: sddm.canPowerOff
-        icon: "file:///home/detluck/Projects/sitykha-shell/assets/icons/power.svg"
+        icon: Pathes.getIcon("power.svg", "lock")
         contentColor: Config.menuAreaPopupsContentColor
         activeContentColor: Config.menuAreaPopupsActiveContentColor
         fontFamily: Config.menuAreaPopupsFontFamily

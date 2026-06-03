@@ -3,6 +3,7 @@ import QtQuick
 import QtQuick.Effects
 import QtQuick.Layouts
 import Sitykha.Backend
+import qs.services
 
 Item {
     id: lockScreen
@@ -85,7 +86,7 @@ Item {
 
             Image {
                 id: lockIcon
-                source: "file:///home/detluck/Projects/sitykha-shell/assets/icons/" + (Config.lock.lockScreen.message.icon || "enter.svg")
+                source: Pathes.getIcon(Config.lock.lockScreen.message.icon || "enter.svg", "lock")
                 width: Config.lock.lockScreen.message.iconSize * Config.lock.generalScale
                 height: width
                 sourceSize: Qt.size(width, height)
@@ -173,8 +174,6 @@ Item {
 
     Keys.onPressed: function (event) {
         if (event.key === Qt.Key_CapsLock) {
-            // Note: Make sure capsLockOn is defined in the root of the file containing this Item,
-            // or redefine root.capsLockOn to target the correct parent.
             lockScreen.capsLockOn = !lockScreen.capsLockOn;
         }
 
