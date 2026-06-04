@@ -8,6 +8,7 @@ import qs.services
 Item {
     id: lockScreen
     signal loginRequested
+    signal capsLockToggled()
     required property bool capsLockOn
 
     ColumnLayout {
@@ -174,7 +175,7 @@ Item {
 
     Keys.onPressed: function (event) {
         if (event.key === Qt.Key_CapsLock) {
-            lockScreen.capsLockOn = !lockScreen.capsLockOn;
+            lockScreen.capsLockToggled();
         }
 
         if (event.key === Qt.Key_Escape) {

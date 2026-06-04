@@ -14,8 +14,10 @@ Item {
     signal close
     signal toggleLayoutPopup
     signal unlockRequested
+    signal capsLockToggled()
 
     property bool capsLockOn: false
+    onCapsLockOnChanged: updateCapsLock()
 
     state: "normal"
     property bool stateChanging: false
@@ -31,6 +33,7 @@ Item {
         if (state === "normal") {
             resetFocus();
         }
+        updateCapsLock();
     }
 
     readonly property alias password: password
@@ -363,7 +366,7 @@ Item {
             }
             password.text = "";
         } else if (event.key === Qt.Key_CapsLock) {
-            loginScreen.capsLockOn = !loginScreen.capsLockOn;
+            loginScreen.capsLockToggled();
         }
         event.accepted = true;
     }

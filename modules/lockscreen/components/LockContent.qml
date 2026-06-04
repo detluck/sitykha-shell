@@ -194,6 +194,7 @@ WlSessionLockSurface {
                 focus: mainFrame.state === "lockState"
                 enabled: mainFrame.state === "lockState"
                 capsLockOn: root.capsLockOn
+                onCapsLockToggled: root.capsLockOn = !root.capsLockOn
 
                 onLoginRequested: {
                     mainFrame.state = "loginState";
@@ -209,6 +210,7 @@ WlSessionLockSurface {
                 opacity: 0.0
                 capsLockOn: root.capsLockOn
                 pamAuth: pamContext
+                onCapsLockToggled: root.capsLockOn = !root.capsLockOn
 
                 onClose: {
                     mainFrame.state = "lockState";
