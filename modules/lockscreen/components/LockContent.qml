@@ -15,7 +15,7 @@ WlSessionLockSurface {
 
     required property WlSessionLock lock
     property bool capsLockOn: false
-    property real blurMax: 0.0
+    property real blur: 0.0
     property real brightness: 0.0
     property real saturation: 0.0
 
@@ -24,9 +24,10 @@ WlSessionLockSurface {
         config: "login"
     }
 
-    Item {
+    FocusScope {
         id: mainFrame
         anchors.fill: parent
+        focus: true
 
         state: Config.lock.lockScreen.display ? "lockState" : "loginState"
 
@@ -47,7 +48,7 @@ WlSessionLockSurface {
                 }
                 PropertyChanges {
                     target: root
-                    blurMax: Config.lock.lockScreen.blur
+                    blur: Config.lock.lockScreen.blur / Math.max(Config.lock.lockScreen.blur, Config.lock.loginScreen.blur, 1)
                     brightness: Config.lock.lockScreen.brightness
                     saturation: Config.lock.lockScreen.saturation
                 }
@@ -68,7 +69,7 @@ WlSessionLockSurface {
                 }
                 PropertyChanges {
                     target: root
-                    blurMax: Config.lock.loginScreen.blur
+                    blur: Config.lock.loginScreen.blur / Math.max(Config.lock.lockScreen.blur, Config.lock.loginScreen.blur, 1)
                     brightness: Config.lock.loginScreen.brightness
                     saturation: Config.lock.loginScreen.saturation
                 }
@@ -82,7 +83,7 @@ WlSessionLockSurface {
                 duration: 150
             }
             PropertyAnimation {
-                properties: "blurMax,brightness,saturation"
+                properties: "blur,brightness,saturation"
                 duration: 400
             }
         }
@@ -173,16 +174,18 @@ WlSessionLockSurface {
             id: backgroundEffect
             source: backgroundManager
             anchors.fill: parent
-            blurEnabled: root.blurMax > 0
-            blur: root.blurMax > 0 ? 1.0 : 0.0
+            blurEnabled: Math.max(Config.lock.lockScreen.blur, Config.lock.loginScreen.blur) > 0
+            blur: root.blur
+            blurMax: Math.max(Config.lock.lockScreen.blur, Config.lock.loginScreen.blur)
             brightness: root.brightness
             saturation: root.saturation
             autoPaddingEnabled: false
         }
 
-        Item {
+        FocusScope {
             id: screenContainer
             anchors.fill: parent
+            focus: true
 
             LockScreen {
                 id: lockScreen

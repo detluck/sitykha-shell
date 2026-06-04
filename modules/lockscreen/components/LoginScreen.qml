@@ -239,7 +239,6 @@ Item {
                     onAccepted: {
                         loginScreen.login();
                     }
-                    Component.onCompleted: input.forceActiveFocus()
                 }
 
                 IconButton {
