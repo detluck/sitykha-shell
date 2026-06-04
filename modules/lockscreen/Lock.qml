@@ -1,12 +1,26 @@
 pragma ComponentBehavior: Bound
+import Quickshell
 import Quickshell.Wayland
+import Quickshell.Io
 import QtQuick
 import qs.modules.lockscreen.components
 
-WlSessionLock {
-    id: wlLock
-    locked: true
-    LockContent {
-        lock: wlLock
+Scope {
+    id: lockController
+
+    WlSessionLock {
+        id: wlLock
+
+        LockContent {
+            lock: wlLock
+        }
+    }
+
+    IpcHandler {
+        target: "wlLock"
+
+        function lock(): void {
+            wlLock.locked = true;
+        }
     }
 }
