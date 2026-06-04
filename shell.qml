@@ -1,6 +1,6 @@
+pragma ComponentBehavior: Bound
 import QtQuick
 import Quickshell
-import Sitykha.Backend
 import "modules/lockscreen"
 
 ShellRoot {
