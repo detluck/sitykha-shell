@@ -16,7 +16,6 @@ compile_commands.json
 CTestTestfile.cmake
 Testing/
 CMakeFiles/
-Makefile
 install_manifest.txt
 
 # -----------------------------

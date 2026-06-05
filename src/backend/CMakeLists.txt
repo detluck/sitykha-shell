@@ -9,6 +9,8 @@ qt_add_qml_module(sitykha-backend
         config/ConfigObject.hpp
         config/lock/LockConfig.cpp
         config/lock/LockConfig.hpp
+        services/UserInfo.hpp
+        services/UserInfo.cpp
 )
 
 target_link_libraries(sitykha-backend
@@ -23,6 +25,7 @@ target_include_directories(sitykha-backend
     PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/config
         ${CMAKE_CURRENT_SOURCE_DIR}/config/lock
+        ${CMAKE_CURRENT_SOURCE_DIR}/services
 )
 
 install(TARGETS sitykha-backend sitykha-backendplugin

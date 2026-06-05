@@ -14,7 +14,7 @@ Item {
     signal close
     signal toggleLayoutPopup
     signal unlockRequested
-    signal capsLockToggled()
+    signal capsLockToggled
 
     property bool capsLockOn: false
     onCapsLockOnChanged: updateCapsLock()
@@ -40,8 +40,8 @@ Item {
     readonly property alias loginButton: loginButton
     readonly property alias loginContainer: loginContainer
 
-    property string userName: "detluck"
-    property string userRealName: "Pavlo Sytnyk"
+    property string userName: UserInfo.userName
+    property string userRealName: UserInfo.realName
     property bool userNeedsPassword: true
 
     function login() {
