@@ -45,9 +45,11 @@ if("backend" IN_LIST ENABLE_MODULES)
 endif()
 
 if("shell" IN_LIST ENABLE_MODULES)
-  foreach(dir modules services assets)
+  foreach(dir modules services components)
     install(DIRECTORY ${dir} DESTINATION "${INSTALL_QSCONFDIR}")
   endforeach()
+
+  install(DIRECTORY assets/wallpapers DESTINATION "${INSTALL_QSCONFDIR}/assets")
 
   install(FILES shell.qml DESTINATION "${INSTALL_QSCONFDIR}")
 endif()

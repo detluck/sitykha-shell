@@ -11,11 +11,11 @@ Singleton {
     readonly property string cache: `${Quickshell.env("XDG_CACHE_HOME") || `${home}/.cache`}/sitykha`
 
     function getIcon(name: string, module: string): url {
-        return Qt.resolvedUrl(`root:/assets/icons/${module}/${name}`);
+        return Qt.resolvedUrl(`qrc:/icons/${module}/${name}`);
     }
 
     function getImage(name: string, module: string): url {
-        return Qt.resolvedUrl(`root:/assets/images/${module}/${name}`);
+        return Qt.resolvedUrl(`qrc:/images/${module}/${name}`);
     }
 
     function getWallpaper(name: string): url {
@@ -23,7 +23,7 @@ Singleton {
     }
 
     function getFont(name: string): url {
-        return Qt.resolvedUrl(`root:/assets/fonts/${name}`);
+        return Qt.resolvedUrl(`qrc:/fonts/${name}`);
     }
 
     function absolutePath(path: string): string {

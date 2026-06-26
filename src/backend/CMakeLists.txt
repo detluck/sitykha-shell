@@ -13,6 +13,49 @@ qt_add_qml_module(sitykha-backend
         services/UserInfo.cpp
 )
 
+qt_add_resources(sitykha-backend "ui_icons"
+    PREFIX "/icons"
+    BASE "${CMAKE_SOURCE_DIR}/assets/icons"
+    FILES
+        "${CMAKE_SOURCE_DIR}/assets/icons/lock/arrow-right.svg"
+        "${CMAKE_SOURCE_DIR}/assets/icons/lock/backspace.svg"
+        "${CMAKE_SOURCE_DIR}/assets/icons/lock/catppuccin.png"
+        "${CMAKE_SOURCE_DIR}/assets/icons/lock/enter-key.svg"
+        "${CMAKE_SOURCE_DIR}/assets/icons/lock/enter.svg"
+        "${CMAKE_SOURCE_DIR}/assets/icons/lock/eye-cl.svg"
+        "${CMAKE_SOURCE_DIR}/assets/icons/lock/eye-o.svg"
+        "${CMAKE_SOURCE_DIR}/assets/icons/lock/handwriting.svg"
+        "${CMAKE_SOURCE_DIR}/assets/icons/lock/hidekeyboard.svg"
+        "${CMAKE_SOURCE_DIR}/assets/icons/lock/keyboard.svg"
+        "${CMAKE_SOURCE_DIR}/assets/icons/lock/language.svg"
+        "${CMAKE_SOURCE_DIR}/assets/icons/lock/password.svg"
+        "${CMAKE_SOURCE_DIR}/assets/icons/lock/selectionhandle.svg"
+        "${CMAKE_SOURCE_DIR}/assets/icons/lock/settings.svg"
+        "${CMAKE_SOURCE_DIR}/assets/icons/lock/shift-fill.svg"
+        "${CMAKE_SOURCE_DIR}/assets/icons/lock/shift-upper.svg"
+        "${CMAKE_SOURCE_DIR}/assets/icons/lock/shift.svg"
+        "${CMAKE_SOURCE_DIR}/assets/icons/lock/spinner.svg"
+        "${CMAKE_SOURCE_DIR}/assets/icons/lock/textmode.svg"
+        "${CMAKE_SOURCE_DIR}/assets/icons/lock/user-default.svg"
+        "${CMAKE_SOURCE_DIR}/assets/icons/power/power-reboot.svg"
+        "${CMAKE_SOURCE_DIR}/assets/icons/power/power-suspend.svg"
+        "${CMAKE_SOURCE_DIR}/assets/icons/power/power.svg"
+
+)
+
+#qt_add_resources(sitykha-backend "ui_images"
+#    PREFIX "/images"
+#    BASE "${CMAKE_SOURCE_DIR}/assets/images"
+#    FILES
+#)
+
+qt_add_resources(sitykha-backend "ui_fonts"
+    PREFIX "/fonts"
+    BASE "${CMAKE_SOURCE_DIR}/assets/fonts"
+    FILES
+        "${CMAKE_SOURCE_DIR}/assets/fonts/redhat/RedHatDisplay-Regular.otf"
+)
+
 target_link_libraries(sitykha-backend
     PRIVATE
         Qt6::Core

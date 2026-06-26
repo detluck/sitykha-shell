@@ -353,6 +353,7 @@ Item {
                 }
             }
         }
+        PowerMenu {}
     }
 
     Keys.onPressed: function (event) {

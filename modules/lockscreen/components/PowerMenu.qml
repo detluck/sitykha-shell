@@ -1,110 +1,42 @@
 import QtQuick
-import QtQuick.Layouts
-import QtQuick.Controls
-import qs.services
+import Quickshell.Io
+import qs.components
 
-ColumnLayout {
-    id: selector
-    width: Config.powerPopupWidth * Config.generalScale
-    spacing: 2
+CustomMenu {
+    id: powerButton
+    width: 40
+    height: 36
 
-    signal close
+    mainIcon: "power.svg"
+    iconModule: "power"
+    popUpDirection: "up"
 
-    KeyNavigation.up: shutdownButton
-    KeyNavigation.down: suspendButton
+    hoveredColor: "#312229"
+    activeContentColor: "#f38ba8"
 
-    IconButton {
-        id: suspendButton
-
-        preferredWidth: Layout.preferredWidth
-        Layout.preferredHeight: Config.menuAreaPopupsItemHeight * Config.generalScale
-        Layout.preferredWidth: Config.powerPopupWidth * Config.generalScale
-
-        focus: selector.visible
-        width: Layout.preferredWidth
-        enabled: sddm.canSuspend
-        icon: Pathes.getIcon("power-suspend.svg", "lock")
-        contentColor: Config.menuAreaPopupsContentColor
-        activeContentColor: Config.menuAreaPopupsActiveContentColor
-        fontFamily: Config.menuAreaPopupsFontFamily
-        backgroundColor: "transparent"
-        activeBackgroundColor: Config.menuAreaPopupsActiveOptionBackgroundColor
-        activeBackgroundOpacity: Config.menuAreaPopupsActiveOptionBackgroundOpacity
-        iconSize: Config.menuAreaPopupsIconSize
-        fontSize: Config.menuAreaPopupsFontSize
-        onClicked: {
-            selector.close();
-            sddm.suspend();
+    menuModel: [
+        {
+            label: "Sleep",
+            iconName: "moon.svg",
+            actionStr: "suspend"
+        },
+        {
+            label: "Reboot",
+            iconName: "refresh.svg",
+            actionStr: "reboot"
+        },
+        {
+            label: "Shutdown",
+            iconName: "power.svg",
+            actionStr: "poweroff"
         }
-        label: textConstants.suspend
+    ]
 
-        KeyNavigation.up: shutdownButton
-        KeyNavigation.down: rebootButton
-    }
+    onActionTriggered: actionId => {
+        console.log("Executing system action: " + actionId);
 
-    IconButton {
-        id: rebootButton
-
-        preferredWidth: Layout.preferredWidth
-        Layout.preferredHeight: Config.menuAreaPopupsItemHeight * Config.generalScale
-        Layout.preferredWidth: Config.powerPopupWidth * Config.generalScale
-
-        focus: selector.visible
-        width: Layout.preferredWidth
-        enabled: sddm.canReboot
-        icon: Pathes.getIcon("power-reboot.svg", "lock")
-        contentColor: Config.menuAreaPopupsContentColor
-        activeContentColor: Config.menuAreaPopupsActiveContentColor
-        fontFamily: Config.menuAreaPopupsFontFamily
-        backgroundColor: "transparent"
-        activeBackgroundColor: Config.menuAreaPopupsActiveOptionBackgroundColor
-        activeBackgroundOpacity: Config.menuAreaPopupsActiveOptionBackgroundOpacity
-        iconSize: Config.menuAreaPopupsIconSize
-        fontSize: Config.menuAreaPopupsFontSize
-        onClicked: {
-            selector.close();
-            sddm.reboot();
-        }
-        label: textConstants.reboot
-
-        KeyNavigation.up: suspendButton
-        KeyNavigation.down: shutdownButton
-    }
-
-    IconButton {
-        id: shutdownButton
-
-        preferredWidth: Layout.preferredWidth
-        Layout.preferredHeight: Config.menuAreaPopupsItemHeight * Config.generalScale
-        Layout.preferredWidth: Config.powerPopupWidth * Config.generalScale
-
-        focus: selector.visible
-        width: Layout.preferredWidth
-        enabled: sddm.canPowerOff
-        icon: Pathes.getIcon("power.svg", "lock")
-        contentColor: Config.menuAreaPopupsContentColor
-        activeContentColor: Config.menuAreaPopupsActiveContentColor
-        fontFamily: Config.menuAreaPopupsFontFamily
-        backgroundColor: "transparent"
-        activeBackgroundColor: Config.menuAreaPopupsActiveOptionBackgroundColor
-        activeBackgroundOpacity: Config.menuAreaPopupsActiveOptionBackgroundOpacity
-        iconSize: Config.menuAreaPopupsIconSize
-        fontSize: Config.menuAreaPopupsFontSize
-        onClicked: {
-            selector.close();
-            sddm.powerOff();
-        }
-        label: textConstants.shutdown
-
-        KeyNavigation.up: rebootButton
-        KeyNavigation.down: suspendButton
-    }
-
-    Keys.onPressed: function (event) {
-        if (event.key == Qt.Key_Return || event.key == Qt.Key_Enter || event.key === Qt.Key_Space) {
-            selector.close();
-        } else if (event.key === Qt.Key_CapsLock) {
-            root.capsLockOn = !root.capsLockOn;
-        }
+    // let cmd = "systemctl " + actionId;
+    // powerProcess.command = ["sh", "-c", cmd];
+    // powerProcess.start();
     }
 }
