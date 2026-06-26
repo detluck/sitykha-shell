@@ -14,6 +14,7 @@ class KeyboardModel : public QObject {
   QML_UNCREATABLE(
       "KeyboardModel is a Singleton, use KeyboardModel.<property> directly")
 
+  Q_PROPERTY(QVariantList menuLayouts READ menuLayouts NOTIFY layoutsChanged)
   Q_PROPERTY(QStringList layouts READ layouts NOTIFY layoutsChanged)
   Q_PROPERTY(QString activeKeymap READ activeKeymap NOTIFY activeKeymapChanged)
   Q_PROPERTY(int activeIndex READ activeIndex NOTIFY activeIndexChanged)
@@ -22,7 +23,7 @@ class KeyboardModel : public QObject {
 
 public:
   explicit KeyboardModel(QObject *parent = nullptr);
-
+  QVariantList menuLayouts() const;
   QStringList layouts() const;
   QString activeKeymap() const;
   int activeIndex() const;

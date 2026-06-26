@@ -299,6 +299,8 @@ class MenuSessionConfig : public ConfigObject {
                   "#FFFFFF") // @desc:Icon and text color.
   CONFIG_PROPERTY(QString, activeContentColor,
                   "#FFFFFF")          // @desc:Hovered text color.
+  CONFIG_PROPERTY(QString, btnContentHoveredColor,
+                  "#FFFFFF")          // @desc:Hovered button icon color.
   CONFIG_PROPERTY(int, borderSize, 0) // @desc:Border size.
   CONFIG_PROPERTY(int, fontSize, 10)  // @desc:Font size.
   CONFIG_PROPERTY(int, iconSize, 16)  // @desc:Icon size.
@@ -324,6 +326,8 @@ class MenuLayoutConfig : public ConfigObject {
   CONFIG_PROPERTY(QString, contentColor, "#FFFFFF") // @desc:Text color.
   CONFIG_PROPERTY(QString, activeContentColor,
                   "#FFFFFF")                     // @desc:Hovered text color.
+  CONFIG_PROPERTY(QString, btnContentHoveredColor,
+                  "#FFFFFF")                     // @desc:Hovered button icon color.
   CONFIG_PROPERTY(int, borderSize, 0)            // @desc:Border size.
   CONFIG_PROPERTY(int, fontSize, 10)             // @desc:Font size.
   CONFIG_PROPERTY(QString, icon, "language.svg") // @desc:Icon.
@@ -349,6 +353,8 @@ class MenuPowerConfig : public ConfigObject {
   CONFIG_PROPERTY(QString, contentColor, "#FFFFFF") // @desc:Icon color.
   CONFIG_PROPERTY(QString, activeContentColor,
                   "#FFFFFF")                  // @desc:Hovered icon color.
+  CONFIG_PROPERTY(QString, btnContentHoveredColor,
+                  "#FFFFFF")                  // @desc:Hovered button icon color.
   CONFIG_PROPERTY(int, borderSize, 0)         // @desc:Border size.
   CONFIG_PROPERTY(QString, icon, "power.svg") // @desc:Icon.
   CONFIG_PROPERTY(int, iconSize, 16)          // @desc:Icon size.

@@ -17,10 +17,11 @@ Item {
         id: internalImage
         anchors.fill: parent
         source: root.source
-        sourceSize: Qt.size(root.size, root.size)
+        sourceSize: Qt.size(width > 0 ? width : root.size, height > 0 ? height : root.size)
         fillMode: Image.PreserveAspectFit
         asynchronous: true
         cache: true
+        antialiasing: true
 
         visible: false
     }
@@ -30,7 +31,7 @@ Item {
         source: internalImage
 
         colorizationColor: root.color
-
         colorization: 1.0
+        antialiasing: true
     }
 }

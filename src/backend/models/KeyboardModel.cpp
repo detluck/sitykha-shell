@@ -42,6 +42,19 @@ void KeyboardModel::refresh() {
   process->start("hyprctl", {"devices", "-j"});
 }
 
+QVariantList KeyboardModel::menuLayouts() const {
+  QVariantList list;
+
+  for (int i = 0; i < m_layouts.size(); ++i) {
+    QVariantMap map;
+
+    map["label"] = m_layouts[i];
+    map["actionData"] = i;
+    list.append(map);
+  }
+  return list;
+}
+
 void KeyboardModel::parse(const QByteArray &json) {
   const auto doc = QJsonDocument::fromJson(json);
   if (doc.isNull())
@@ -65,7 +78,7 @@ void KeyboardModel::parse(const QByteArray &json) {
 
   // parse data
   const QStringList layouts =
-      kb["layouts"]
+      kb["layout"]
           .toString()
           .split(",", Qt::SkipEmptyParts)
           .replaceInStrings(QRegularExpression("^\\s+|\\s+$"), "");

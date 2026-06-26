@@ -353,7 +353,6 @@ Item {
                 }
             }
         }
-        PowerMenu {}
     }
 
     Keys.onPressed: function (event) {
@@ -377,4 +376,39 @@ Item {
         anchors.fill: parent
         hoverEnabled: true
     }
+
+    Row {
+        id: menuRow
+        readonly property string positionStr: Config.lock.loginScreen.menuArea.power.position
+
+        // Vertical anchoring
+        anchors.top: menuRow.positionStr.indexOf("top") !== -1 ? parent.top : undefined
+        anchors.bottom: menuRow.positionStr.indexOf("bottom") !== -1 ? parent.bottom : undefined
+        anchors.verticalCenter: (menuRow.positionStr === "center" || menuRow.positionStr.indexOf("center-") !== -1) ? parent.verticalCenter : undefined
+
+        // Horizontal anchoring
+        anchors.left: menuRow.positionStr.indexOf("left") !== -1 ? parent.left : undefined
+        anchors.right: menuRow.positionStr.indexOf("right") !== -1 ? parent.right : undefined
+        anchors.horizontalCenter: (menuRow.positionStr === "center" || menuRow.positionStr.indexOf("-center") !== -1) ? parent.horizontalCenter : undefined
+
+        // Margins relative to the screen (parent)
+        anchors.topMargin: Config.lock.loginScreen.menuArea.buttons.marginTop * Config.lock.generalScale
+        anchors.rightMargin: Config.lock.loginScreen.menuArea.buttons.marginRight * Config.lock.generalScale
+        anchors.bottomMargin: Config.lock.loginScreen.menuArea.buttons.marginBottom * Config.lock.generalScale
+        anchors.leftMargin: Config.lock.loginScreen.menuArea.buttons.marginLeft * Config.lock.generalScale
+
+        // Spacing between menus in the row
+        spacing: Config.lock.loginScreen.menuArea.buttons.spacing * Config.lock.generalScale
+
+        LayoutMenu {
+            id: layoutMenu
+            visible: Config.lock.loginScreen.menuArea.layout.display
+        }
+
+        PowerMenu {
+            id: powerMenu
+            visible: Config.lock.loginScreen.menuArea.power.display
+        }
+    }
 }
+

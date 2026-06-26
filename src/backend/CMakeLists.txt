@@ -11,6 +11,8 @@ qt_add_qml_module(sitykha-backend
         config/lock/LockConfig.hpp
         services/UserInfo.hpp
         services/UserInfo.cpp
+        models/KeyboardModel.hpp
+        models/KeyboardModel.cpp
 )
 
 qt_add_resources(sitykha-backend "ui_icons"
@@ -54,6 +56,10 @@ qt_add_resources(sitykha-backend "ui_fonts"
     BASE "${CMAKE_SOURCE_DIR}/assets/fonts"
     FILES
         "${CMAKE_SOURCE_DIR}/assets/fonts/redhat/RedHatDisplay-Regular.otf"
+        "${CMAKE_SOURCE_DIR}/assets/fonts/redhat/RedHatDisplay-Medium.otf"
+        "${CMAKE_SOURCE_DIR}/assets/fonts/redhat/RedHatDisplay-SemiBold.otf"
+        "${CMAKE_SOURCE_DIR}/assets/fonts/redhat/RedHatDisplay-Bold.otf"
+        "${CMAKE_SOURCE_DIR}/assets/fonts/redhat/RedHatDisplay-Black.otf"
 )
 
 target_link_libraries(sitykha-backend
@@ -69,6 +75,7 @@ target_include_directories(sitykha-backend
         ${CMAKE_CURRENT_SOURCE_DIR}/config
         ${CMAKE_CURRENT_SOURCE_DIR}/config/lock
         ${CMAKE_CURRENT_SOURCE_DIR}/services
+        ${CMAKE_CURRENT_SOURCE_DIR}/models
 )
 
 install(TARGETS sitykha-backend sitykha-backendplugin
