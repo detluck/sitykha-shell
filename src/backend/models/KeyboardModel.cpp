@@ -77,11 +77,14 @@ void KeyboardModel::parse(const QByteArray &json) {
     kb = keyboards[0].toObject();
 
   // parse data
-  const QStringList layouts =
+  QStringList layouts =
       kb["layout"]
           .toString()
           .split(",", Qt::SkipEmptyParts)
           .replaceInStrings(QRegularExpression("^\\s+|\\s+$"), "");
+  for (int i = 0; i < layouts.size(); ++i) {
+    layouts[i] = layouts[i].toUpper();
+  }
 
   const QString activeKeymap = kb["active_keymap"].toString();
   const int activeIndex = kb["active_layout_index"].toInt();

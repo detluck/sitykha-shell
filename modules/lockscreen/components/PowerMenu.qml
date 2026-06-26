@@ -64,10 +64,10 @@ CustomMenu {
     ]
 
     onActionTriggered: actionId => {
-        console.log("Executing system action: " + actionId);
+        powerProcess.exec(["systemctl", actionId]);
+    }
 
-    // let cmd = "systemctl " + actionId;
-    // powerProcess.command = ["sh", "-c", cmd];
-    // powerProcess.start();
+    Process {
+        id: powerProcess
     }
 }
