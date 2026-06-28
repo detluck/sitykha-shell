@@ -3,9 +3,6 @@
 
 namespace sitykha::config {
 
-// ==========================================
-// 1. LEAF CONSTRUCTORS
-// ==========================================
 ClockConfig::ClockConfig(QObject *parent) : ConfigObject(parent) {}
 DateConfig::DateConfig(QObject *parent) : ConfigObject(parent) {}
 MessageConfig::MessageConfig(QObject *parent) : ConfigObject(parent) {}
@@ -24,9 +21,6 @@ MenuLayoutConfig::MenuLayoutConfig(QObject *parent) : ConfigObject(parent) {}
 MenuPowerConfig::MenuPowerConfig(QObject *parent) : ConfigObject(parent) {}
 TooltipsConfig::TooltipsConfig(QObject *parent) : ConfigObject(parent) {}
 
-// ==========================================
-// 2. MID-LEVEL BRANCH CONSTRUCTORS
-// ==========================================
 LockScreenConfig::LockScreenConfig(QObject *parent) : ConfigObject(parent) {
   m_clock = new ClockConfig(this);
   m_date = new DateConfig(this);
@@ -72,9 +66,6 @@ MenuAreaConfig::MenuAreaConfig(QObject *parent) : ConfigObject(parent) {
   connect(m_power, &ConfigObject::modified, this, &MenuAreaConfig::modified);
 }
 
-// ==========================================
-// 3. HIGH-LEVEL BRANCH CONSTRUCTORS
-// ==========================================
 LoginScreenConfig::LoginScreenConfig(QObject *parent) : ConfigObject(parent) {
   m_loginArea = new LoginAreaConfig(this);
   m_menuArea = new MenuAreaConfig(this);
@@ -85,9 +76,6 @@ LoginScreenConfig::LoginScreenConfig(QObject *parent) : ConfigObject(parent) {
           &LoginScreenConfig::modified);
 }
 
-// ==========================================
-// 4. ROOT CONSTRUCTOR
-// ==========================================
 LockConfig::LockConfig(QObject *parent) : ConfigObject(parent) {
   m_lockScreen = new LockScreenConfig(this);
   m_loginScreen = new LoginScreenConfig(this);

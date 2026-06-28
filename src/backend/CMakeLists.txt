@@ -9,6 +9,8 @@ qt_add_qml_module(sitykha-backend
         config/ConfigObject.hpp
         config/lock/LockConfig.cpp
         config/lock/LockConfig.hpp
+        config/appearance/GlobalThemeConfig.cpp
+        config/appearance/GlobalThemeConfig.hpp
         services/UserInfo.hpp
         services/UserInfo.cpp
         models/KeyboardModel.hpp

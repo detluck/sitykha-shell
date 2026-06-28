@@ -2,9 +2,8 @@
  * @file ConfigObject.hpp
  *
  * @note Architectural Reference & Attribution:
- * The foundational logic for the configuration batching, Qt MetaObject JSON
- * serialization, and floating-point type traits was referenced and adapted
- * from the Caelestia Shell project.
+ * The foundational logic for the configuration batching was referenced and
+ * adapted from the Caelestia Shell project.
  *
  * Original Source: https://github.com/caelestia-dots/shell
  *
@@ -53,6 +52,39 @@ public:                                                                        \
 private:                                                                       \
   type *m_##name = nullptr;
 
+#define CONFIG_THEME_PROPERTY(type, name, emptyVal, fallbackExpr)              \
+                                                                               \
+  /* The Shadow Property (For  C++ Parser only) */                             \
+  Q_PROPERTY(type raw_##name READ raw_##name WRITE set##name NOTIFY            \
+                 raw_##name##Changed)                                          \
+                                                                               \
+  /* The Clean UI Property (For QML only) */                                   \
+  Q_PROPERTY(type name READ name NOTIFY name##Changed)                         \
+                                                                               \
+public:                                                                        \
+  [[nodiscard]] type raw_##name() const { return m_##name; }                   \
+                                                                               \
+  [[nodiscard]] type name() const {                                            \
+    if (m_##name != emptyVal) {                                                \
+      return m_##name;                                                         \
+    }                                                                          \
+    return fallbackExpr;                                                       \
+  }                                                                            \
+                                                                               \
+  void set##name(const type &val) {                                            \
+    if (sitykha::config::ConfigObject::updateMember(m_##name, val)) {          \
+      Q_EMIT raw_##name##Changed();                                            \
+      Q_EMIT name##Changed();                                                  \
+      notifyPropertyChanged(QStringLiteral("raw_" #name),                      \
+                            QVariant::fromValue(m_##name));                    \
+    }                                                                          \
+  }                                                                            \
+  Q_SIGNAL void raw_##name##Changed();                                         \
+  Q_SIGNAL void name##Changed();                                               \
+                                                                               \
+private:                                                                       \
+  type m_##name = emptyVal;
+
 namespace sitykha::config {
 
 Q_DECLARE_LOGGING_CATEGORY(lcConfig)
@@ -64,6 +96,7 @@ public:
   explicit ConfigObject(QObject *parent = nullptr);
 
   void loadJson(const QJsonObject &obj);
+  void resetThemeOverrides();
   [[nodiscard]] QJsonObject saveToJson() const;
 
 signals:

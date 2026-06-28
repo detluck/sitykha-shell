@@ -1,5 +1,6 @@
 #pragma once
 #include "ConfigObject.hpp"
+#include "appearance/GlobalThemeConfig.hpp"
 #include <optional>
 #include <qfilesystemwatcher.h>
 #include <qobjectdefs.h>
@@ -20,7 +21,9 @@ class Config : public ConfigObject {
   QML_SINGLETON
 
   Q_MOC_INCLUDE("lock/LockConfig.hpp")
+  Q_MOC_INCLUDE("appearance/GlobalThemeConfig.hpp")
 
+  CONFIG_SUBOBJECT(GlobalThemeConfig, theme)
   CONFIG_SUBOBJECT(LockConfig, lock)
 
 public:

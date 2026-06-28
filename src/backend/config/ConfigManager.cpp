@@ -1,5 +1,6 @@
 #include "ConfigManager.hpp"
 #include "ConfigObject.hpp"
+#include "appearance/GlobalThemeConfig.hpp"
 #include "lock/LockConfig.hpp"
 #include "qdebug.h"
 #include "qdir.h"
@@ -28,14 +29,15 @@ Config::Config(QObject *parent) : ConfigObject(parent) {
   if (!s_instance) {
     s_instance = this;
   }
+
+  m_theme = new GlobalThemeConfig(this);
   m_lock = new LockConfig(this);
 
-  connect(m_lock, &ConfigObject::modified, this, &Config::save);
-
+  connect(this, &ConfigObject::modified, this, &Config::save);
   setup(QDir::homePath() + "/.config/sitykha/shell.json");
 }
 
-void sitykha::config::Config::setup(const QString &path) {
+void Config::setup(const QString &path) {
   m_filePath = path;
 
   QFileInfo fileInfo(m_filePath);
@@ -97,8 +99,10 @@ void Config::executeReload() {
     return;
 
   QFile file(m_filePath);
-  if (!file.exists())
+  if (!file.exists()) {
+    save();
     return;
+  }
 
   if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
     emit errorOccurred("Failed to read config: " + file.errorString());
