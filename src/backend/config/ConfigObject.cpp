@@ -18,8 +18,11 @@ ConfigObject::ConfigObject(QObject *parent)
   connect(m_batchTimer, &QTimer::timeout, this, &ConfigObject::sendChanges);
 
   if (auto *parentConfig = qobject_cast<ConfigObject *>(parent)) {
-    connect(this, &ConfigObject::modified, parentConfig, [parentConfig]() {
-      // Tell the parent something changed down the tree
+    connect(this, &ConfigObject::modified, parentConfig, [parentConfig](const QMap<QString, QVariant> &changes) {
+      // Propagate the changes to the parent's pendingChanges map
+      for (auto it = changes.constBegin(); it != changes.constEnd(); ++it) {
+        parentConfig->m_pendingChanges.insert(it.key(), it.value());
+      }
       parentConfig->m_batchTimer->start();
     });
   }
@@ -164,6 +167,41 @@ void ConfigObject::resetThemeOverrides() {
         prop.write(this, -1.0);
       } else if (prop.metaType().id() == QMetaType::Int) {
         prop.write(this, -1);
+      }
+    }
+  }
+}
+
+void sitykha::config::ConfigObject::refreshThemeBindings() {
+  const auto *meta = metaObject();
+
+  for (int i = meta->propertyOffset(); i < meta->propertyCount(); ++i) {
+    QMetaProperty prop = meta->property(i);
+    QString name = QString::fromUtf8(prop.name());
+
+    QVariant currentVal = prop.read(this);
+    if (currentVal.canConvert<QObject *>()) {
+      if (auto *subObj =
+              qobject_cast<ConfigObject *>(currentVal.value<QObject *>())) {
+        subObj->refreshThemeBindings();
+      }
+      continue;
+    }
+
+    if (name.startsWith("raw_")) {
+      // 1. Invoke the notify signal of the raw shadow property (e.g. raw_colorChanged)
+      if (prop.hasNotifySignal()) {
+        prop.notifySignal().invoke(this, Qt::DirectConnection);
+      }
+
+      // 2. Retrieve and invoke the notify signal of the clean property (e.g. colorChanged)
+      QString cleanName = name.mid(4);
+      int cleanPropIdx = meta->indexOfProperty(cleanName.toUtf8().constData());
+      if (cleanPropIdx != -1) {
+        QMetaProperty cleanProp = meta->property(cleanPropIdx);
+        if (cleanProp.hasNotifySignal()) {
+          cleanProp.notifySignal().invoke(this, Qt::DirectConnection);
+        }
       }
     }
   }

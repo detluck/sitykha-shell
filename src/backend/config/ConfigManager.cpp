@@ -34,6 +34,8 @@ Config::Config(QObject *parent) : ConfigObject(parent) {
   m_lock = new LockConfig(this);
 
   connect(this, &ConfigObject::modified, this, &Config::save);
+  connect(m_theme, &ConfigObject::modified, m_lock,
+          &ConfigObject::refreshThemeBindings);
   setup(QDir::homePath() + "/.config/sitykha/shell.json");
 }
 

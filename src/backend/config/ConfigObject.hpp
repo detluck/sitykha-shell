@@ -96,8 +96,11 @@ public:
   explicit ConfigObject(QObject *parent = nullptr);
 
   void loadJson(const QJsonObject &obj);
-  void resetThemeOverrides();
+  Q_INVOKABLE void resetThemeOverrides();
   [[nodiscard]] QJsonObject saveToJson() const;
+
+public slots:
+  void refreshThemeBindings();
 
 signals:
   void modified(const QMap<QString, QVariant> &changed);

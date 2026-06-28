@@ -144,7 +144,8 @@ Rectangle {
                 anchors.fill: parent
                 cursorShape: Qt.PointingHandCursor
                 onClicked: {
-                    input.isPassword = !input.isPassword;
+                    //input.isPassword = !input.isPassword;
+                    Config.resetThemeOverrides();
                 }
             }
         }
