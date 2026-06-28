@@ -1,5 +1,5 @@
 import QtQuick
-import Quickshell.Io
+import Quickshell
 import qs.components
 import Sitykha.Backend
 
@@ -64,10 +64,6 @@ CustomMenu {
     ]
 
     onActionTriggered: actionId => {
-        powerProcess.exec(["systemctl", actionId]);
-    }
-
-    Process {
-        id: powerProcess
+        Quickshell.execDetached(["systemctl", actionId]);
     }
 }
