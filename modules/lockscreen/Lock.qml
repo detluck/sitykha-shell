@@ -8,19 +8,31 @@ import qs.modules.lockscreen.components
 Scope {
     id: lockController
 
-    WlSessionLock {
-        id: wlLock
-
-        LockContent {
-            lock: wlLock
-        }
-    }
-
     IpcHandler {
         target: "wlLock"
 
         function lock(): void {
-            wlLock.locked = true;
+            lockLoader.active = true;
+        }
+    }
+
+    Loader {
+        id: lockLoader
+        active: false
+
+        sourceComponent: WlSessionLock {
+            id: wlLock
+            locked: true
+
+            LockContent {
+                lock: wlLock
+            }
+
+            onLockedChanged: {
+                if (!locked) {
+                    lockLoader.active = false;
+                }
+            }
         }
     }
 }
