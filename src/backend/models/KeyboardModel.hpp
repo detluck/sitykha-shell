@@ -9,10 +9,7 @@
 namespace sitykha::models {
 class KeyboardModel : public QObject {
   Q_OBJECT
-  QML_ELEMENT
-  QML_SINGLETON
-  QML_UNCREATABLE(
-      "KeyboardModel is a Singleton, use KeyboardModel.<property> directly")
+  QML_ANONYMOUS
 
   Q_PROPERTY(QVariantList menuLayouts READ menuLayouts NOTIFY layoutsChanged)
   Q_PROPERTY(QStringList layouts READ layouts NOTIFY layoutsChanged)

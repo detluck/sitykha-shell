@@ -1,7 +1,10 @@
 #include "ConfigManager.hpp"
 #include "ConfigObject.hpp"
+#include "KeyboardModel.hpp"
+#include "WallpaperModel.hpp"
 #include "appearance/GlobalThemeConfig.hpp"
 #include "lock/LockConfig.hpp"
+#include "pathes/PathConfig.hpp"
 #include "qdebug.h"
 #include "qdir.h"
 #include "qfileinfo.h"
@@ -12,6 +15,7 @@
 #include <qjsonparseerror.h>
 #include <qvariant.h>
 
+using namespace sitykha::models;
 namespace sitykha::config {
 Q_LOGGING_CATEGORY(lcConfig, "sitykha.config")
 static Config *s_instance = nullptr;
@@ -29,7 +33,9 @@ Config::Config(QObject *parent) : ConfigObject(parent) {
   if (!s_instance) {
     s_instance = this;
   }
-
+  m_pathes = new PathConfig(this);
+  m_wallpaperModel = new WallpaperModel(m_pathes->wallpapers(), this);
+  m_keyboardModel = new KeyboardModel(this);
   m_theme = new GlobalThemeConfig(this);
   m_lock = new LockConfig(this);
 

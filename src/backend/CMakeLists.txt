@@ -11,6 +11,8 @@ qt_add_qml_module(sitykha-backend
         config/lock/LockConfig.hpp
         config/appearance/GlobalThemeConfig.cpp
         config/appearance/GlobalThemeConfig.hpp
+        config/pathes/PathConfig.hpp
+        config/pathes/PathConfig.cpp
         services/UserInfo.hpp
         services/UserInfo.cpp
         models/KeyboardModel.hpp
@@ -70,6 +72,7 @@ target_link_libraries(sitykha-backend
         Qt6::Qml
         Qt6::Quick
         Qt6::DBus
+        Qt6::Multimedia
 )
 
 target_include_directories(sitykha-backend
@@ -78,6 +81,8 @@ target_include_directories(sitykha-backend
         ${CMAKE_CURRENT_SOURCE_DIR}/config/lock
         ${CMAKE_CURRENT_SOURCE_DIR}/services
         ${CMAKE_CURRENT_SOURCE_DIR}/models
+        ${CMAKE_CURRENT_SOURCE_DIR}/config/appearance
+        ${CMAKE_CURRENT_SOURCE_DIR}/config/pathes 
 )
 
 install(TARGETS sitykha-backend sitykha-backendplugin

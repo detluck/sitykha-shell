@@ -37,7 +37,7 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wunused-lambda-capture)
 endif()
 
-find_package(Qt6 6.6 REQUIRED COMPONENTS Core Qml Quick DBus)
+find_package(Qt6 6.6 REQUIRED COMPONENTS Core Qml Quick DBus Multimedia)
 qt_standard_project_setup(REQUIRES 6.6)
 
 if("backend" IN_LIST ENABLE_MODULES)
