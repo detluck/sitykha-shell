@@ -6,7 +6,6 @@ import QtMultimedia
 import Quickshell.Services.Pam
 import Quickshell.Wayland
 import Sitykha.Backend
-import qs.services
 
 WlSessionLockSurface {
     id: root
@@ -108,7 +107,7 @@ WlSessionLockSurface {
             Image {
                 id: backgroundImage
                 anchors.fill: parent
-                source: !backgroundManager.isVideo ? Pathes.getWallpaper(backgroundManager.currentSource || "default.jpg") : ""
+                source: !backgroundManager.isVideo ? Config.pathes.getWallpaper(backgroundManager.currentSource || "default.jpg") : ""
                 cache: true
                 mipmap: true
                 visible: !backgroundManager.displayColor && !backgroundManager.isVideo
@@ -121,7 +120,7 @@ WlSessionLockSurface {
                 }
                 onStatusChanged: {
                     if (status === Image.Error) {
-                        var fallback = Pathes.getWallpaper("default.jpg");
+                        var fallback = Config.pathes.getWallpaper("default.jpg");
                         if (source !== fallback && source !== "") {
                             source = fallback;
                         }
@@ -143,7 +142,7 @@ WlSessionLockSurface {
                 audioOutput: AudioOutput {
                     muted: true
                 }
-                source: backgroundManager.isVideo && backgroundManager.currentSource.length > 0 ? Pathes.getWallpaper(backgroundManager.currentSource) : ""
+                source: backgroundManager.isVideo && backgroundManager.currentSource.length > 0 ? Config.pathes.getWallpaper(backgroundManager.currentSource) : ""
                 loops: MediaPlayer.Infinite
                 onSourceChanged: {
                     if (source.toString().length > 0) {

@@ -2,7 +2,7 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Controls
-import qs.services
+import Sitykha.Backend
 
 Item {
     id: root
@@ -70,7 +70,7 @@ Item {
         contentItem: Item {
             CustomIcon {
                 anchors.centerIn: parent
-                source: Pathes.getIcon(root.mainIcon, root.iconModule)
+                source: Config.pathes.getIcon(root.mainIcon, root.iconModule)
                 size: root.iconSize
                 color: button.hovered ? root.btnContentHoveredColor : root.contentColor
             }
@@ -130,7 +130,7 @@ Item {
 
                     CustomIcon {
                         anchors.verticalCenter: parent.verticalCenter
-                        source: root.hasIcon(item.modelData) ? Pathes.getIcon(item.modelData.icon, root.iconModule) : ""
+                        source: root.hasIcon(item.modelData) ? Config.pathes.getIcon(item.modelData.icon, root.iconModule) : ""
                         visible: root.hasIcon(item.modelData)
                         size: root.iconSize
                         color: item.hovered ? root.activeContentColor : root.contentColor

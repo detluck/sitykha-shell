@@ -2,26 +2,26 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import Quickshell
 import "modules/lockscreen"
-import "services"
+import Sitykha.Backend
 
 ShellRoot {
     id: root
 
     // Load fonts globally from resource compilation
     FontLoader {
-        source: Pathes.getFont("redhat/RedHatDisplay-Regular.otf")
+        source: Config.pathes.getFont("redhat/RedHatDisplay-Regular.otf")
     }
     FontLoader {
-        source: Pathes.getFont("redhat/RedHatDisplay-Medium.otf")
+        source: Config.pathes.getFont("redhat/RedHatDisplay-Medium.otf")
     }
     FontLoader {
-        source: Pathes.getFont("redhat/RedHatDisplay-SemiBold.otf")
+        source: Config.pathes.getFont("redhat/RedHatDisplay-SemiBold.otf")
     }
     FontLoader {
-        source: Pathes.getFont("redhat/RedHatDisplay-Bold.otf")
+        source: Config.pathes.getFont("redhat/RedHatDisplay-Bold.otf")
     }
     FontLoader {
-        source: Pathes.getFont("redhat/RedHatDisplay-Black.otf")
+        source: Config.pathes.getFont("redhat/RedHatDisplay-Black.otf")
     }
 
     Lock {}

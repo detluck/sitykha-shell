@@ -3,7 +3,6 @@ import QtQuick
 import QtQuick.Effects
 import QtQuick.Layouts
 import Sitykha.Backend
-import qs.services
 
 Item {
     id: lockScreen
@@ -87,7 +86,7 @@ Item {
 
             Image {
                 id: lockIcon
-                source: Pathes.getIcon(Config.lock.lockScreen.message.icon || "enter.svg", "lock")
+                source: Config.pathes.getIcon(Config.lock.lockScreen.message.icon || "enter.svg", "lock")
                 width: Config.lock.lockScreen.message.iconSize * Config.lock.generalScale
                 height: width
                 sourceSize: Qt.size(width, height)

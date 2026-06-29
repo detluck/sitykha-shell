@@ -4,7 +4,6 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell.Services.Pam
 import Sitykha.Backend
-import qs.services
 
 Item {
     id: loginScreen
@@ -171,7 +170,7 @@ Item {
                 id: userAvatar
                 width: Config.lock.loginScreen.loginArea.avatar.activeSize
                 height: width
-                source: loginScreen.userIcon || Pathes.getIcon("user-default.svg", "lock")
+                source: loginScreen.userIcon || Config.pathes.getIcon("user-default.svg", "lock")
                 visible: Config.lock.loginScreen.loginArea.avatar.display
                 Component.onCompleted: {
                     if (Config.lock.loginScreen.loginArea.position === "left") {
@@ -233,9 +232,9 @@ Item {
                     Layout.alignment: Qt.AlignHCenter
                     enabled: loginScreen.state === "normal"
                     visible: loginScreen.userNeedsPassword
-                    icon: Pathes.getIcon(Config.lock.loginScreen.loginArea.passwordInput.icon || "password.svg", "lock")
-                    eyeIconCl: Pathes.getIcon("eye-cl.svg", "lock")
-                    eyeIconO: Pathes.getIcon("eye-o.svg", "lock")
+                    icon: Config.pathes.getIcon(Config.lock.loginScreen.loginArea.passwordInput.icon || "password.svg", "lock")
+                    eyeIconCl: Config.pathes.getIcon("eye-cl.svg", "lock")
+                    eyeIconO: Config.pathes.getIcon("eye-o.svg", "lock")
                     placeholder: "Password"
                     isPassword: true
                     splitBorderRadius: true
@@ -252,7 +251,7 @@ Item {
                     visible: !Config.lock.loginScreen.loginArea.loginButton.hideIfNotNeeded || !loginScreen.userNeedsPassword
                     enabled: loginScreen.state !== "authenticating"
                     activeFocusOnTab: true
-                    icon: Pathes.getIcon(Config.lock.loginScreen.loginArea.loginButton.icon || "arrow-right.svg", "lock")
+                    icon: Config.pathes.getIcon(Config.lock.loginScreen.loginArea.loginButton.icon || "arrow-right.svg", "lock")
                     label: "Login"
                     showLabel: Config.lock.loginScreen.loginArea.loginButton.showTextIfNoPassword && !loginScreen.userNeedsPassword
                     tooltipText: !Config.lock.tooltips.disableLoginButton && (!Config.lock.loginScreen.loginArea.loginButton.showTextIfNoPassword || loginScreen.userNeedsPassword) ? "Login" : ""

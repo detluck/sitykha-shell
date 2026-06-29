@@ -3,7 +3,6 @@ import QtQuick
 import QtQuick.Effects
 import QtQuick.Controls
 import Sitykha.Backend
-import qs.services
 
 Rectangle {
     id: avatar
@@ -53,7 +52,7 @@ Rectangle {
 
         onStatusChanged: {
             if (status === Image.Error) {
-                source = Pathes.getIcon("user-default.svg", "lock");
+                source = Config.pathes.getIcon("user-default.svg", "lock");
                 faceEffects.colorization = 1;
             }
         }

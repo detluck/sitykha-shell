@@ -22,7 +22,6 @@ class WallpaperModel : public QAbstractListModel {
   Q_OBJECT
   QML_ANONYMOUS
 
-  Q_PROPERTY(bool isVideo READ isVideo CONSTANT)
 public:
   enum WallpaperRoles {
     FilePathRole = Qt::UserRole + 1,

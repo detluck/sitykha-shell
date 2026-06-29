@@ -2,10 +2,13 @@
 
 #include "ConfigObject.hpp"
 #include <qdir.h>
+#include <QtQmlIntegration>
 
 namespace sitykha::config {
 
 class PathConfig : public ConfigObject {
+  Q_OBJECT
+  QML_ANONYMOUS
 
   Q_PROPERTY(QString home READ home CONSTANT)
   CONFIG_PROPERTY(QString, config, resolveConfigHome())

@@ -17,6 +17,8 @@ qt_add_qml_module(sitykha-backend
         services/UserInfo.cpp
         models/KeyboardModel.hpp
         models/KeyboardModel.cpp
+        models/WallpaperModel.hpp
+        models/WallpaperModel.cpp
 )
 
 qt_add_resources(sitykha-backend "ui_icons"

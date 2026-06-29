@@ -4,7 +4,6 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import QtQuick.Effects
 import Sitykha.Backend
-import qs.services
 
 Rectangle {
     id: input
@@ -16,9 +15,9 @@ Rectangle {
     property bool isPassword: false
     property bool splitBorderRadius: false
     property alias text: textField.text
-    property string icon: Pathes.getIcon("password.svg", "lock")
-    property string eyeIconCl: Pathes.getIcon("eye-cl.svg", "lock")
-    property string eyeIconO: Pathes.getIcon("eye-o.svg", "lock")
+    property string icon: Config.pathes.getIcon("password.svg", "lock")
+    property string eyeIconCl: Config.pathes.getIcon("eye-cl.svg", "lock")
+    property string eyeIconO: Config.pathes.getIcon("eye-o.svg", "lock")
     property bool enabled: true
 
     width: Config.lock.loginScreen.loginArea.passwordInput.width * Config.lock.generalScale

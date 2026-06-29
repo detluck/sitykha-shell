@@ -45,7 +45,7 @@ if("backend" IN_LIST ENABLE_MODULES)
 endif()
 
 if("shell" IN_LIST ENABLE_MODULES)
-  foreach(dir modules services components)
+  foreach(dir modules components)
     install(DIRECTORY ${dir} DESTINATION "${INSTALL_QSCONFDIR}")
   endforeach()
 

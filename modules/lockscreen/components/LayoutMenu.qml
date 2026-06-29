@@ -50,11 +50,11 @@ CustomMenu {
     popUpDirection: Config.lock.loginScreen.menuArea.layout.popupDirection
     popUpwidth: Config.lock.loginScreen.menuArea.layout.popupWidth * Config.lock.generalScale
 
-    menuModel: KeyboardModel.menuLayouts 
+    menuModel: Config.keyboardModel.menuLayouts 
 
     onActionTriggered: actionId => {
         console.log("Switching layout to index: " + actionId);
-        KeyboardModel.switchLayout(parseInt(actionId));
+        Config.keyboardModel.switchLayout(parseInt(actionId));
     }
 }
 
